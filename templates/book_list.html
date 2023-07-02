@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagination</title>
+</head>
+<body style="height:100vh; margin-start:50px; margin-end:50px;">
+    <div style="display:flex">
+        {% for book in object_list %}
+            <div style="display:block; margin:50px; padding:50px">
+                <img  style="width:200px; height:300px;" src="{{book.image.url}}"></img>
+                <p><b>Kitob nomi:</b>{{book.title}}</p>
+                <p><b>Kitob muallifi:</b>{{book.author}}</p>
+                <p><b>Sahifalar soni:</b>{{book.duration}}</p>    
+            </div>
+        {% endfor %}
+    </div>
+
+         {% comment %} 
+      Agar kinolar soni bittadan yoki bir sahifa uchun mo'ljallanganidan ko'p bo'lsa pagination ko'rsatiladi,
+      aks holda ko'rsatilmaydi
+      {% endcomment %}
+      <div style="">
+      {% if  is_paginated %}
+      <div class="pagination" style="color:#fff; display:flex; margin-left:45%;">
+        <ul style="display:flex; list-style:none;">
+          {% if page_obj.has_previous %}
+            <li ><a style="border:1px white solid; background: green; padding:10px; color:#fff; border-color:#fff; text-decoration:none;" href="?page={{page_obj.previous_page_number}}">Prev</a></li>
+          {% else %}
+            <li><a  class="disabled"></a></li>
+          {% endif %}
+
+          {% for pages in page_obj.paginator.page_range %}
+            {% if page_obj.next_page_number == pages %}
+              <li><a href="" style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;">{{pages}}</a></li>
+            {% else %}
+              <li><a style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;" href="?page={{pages}}">{{pages}}</a></li>
+            {% endif %}
+          {% endfor %}
+          
+          {% if page_obj.has_next %}
+            <li><a  style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;" href="?page={{page_obj.next_page_number}}">Next</a></li>
+          {% else %}
+            <li><a  class="disabled"></a></li>
+          {% endif %}
+        </ul>
+        </div>
+        {% endif %}
+         </div>
+</body>
+</html>
