@@ -1,29 +1,40 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagination</title>
-</head>
-<body style="height:100vh; margin-start:50px; margin-end:50px;">
-    <div style="display:flex">
-        {% for book in object_list %}
-            <div style="display:block; margin:50px; padding:50px">
-                <img  style="width:200px; height:300px;" src="{{book.image.url}}"></img>
-                <p><b>Kitob nomi:</b>{{book.title}}</p>
-                <p><b>Kitob muallifi:</b>{{book.author}}</p>
-                <p><b>Sahifalar soni:</b>{{book.duration}}</p>    
-            </div>
-        {% endfor %}
+{% block content %}
+<body style="height:100vh;">
+    <div class="">
+      {% for message in messages %}
+        <div class="alert alert-{{message.tags}}" role="alert">
+          {{message}}
+        </div>
+      {% endfor %}
     </div>
 
-         {% comment %} 
-      Agar kinolar soni bittadan yoki bir sahifa uchun mo'ljallanganidan ko'p bo'lsa pagination ko'rsatiladi,
-      aks holda ko'rsatilmaydi
-      {% endcomment %}
-      <div style="">
+    <div style="d-flex" class="d-flex container">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Kitob</th>
+            <th scope="col">Kitob nomi</th>
+            <th scope="col">Kitob muallifi</th>
+            <th scope="col">Sahifalar soni</th>
+          </tr>
+        </thead>
+        {% for book in object_list %}
+          <tbody>
+            <tr>
+              <th scope="row">{{forloop.counter}}</th>
+              <td><a href="{% url 'books:book_detail' book.pk  %}"><img width=100px height=150px src="{{book.image.url}}"></img></a></td>
+              <td> {{ book.title}}</td>
+              <td>{{book.author.firstname }}</td>
+              <td>{{book.duration }}</td>
+            </tr>
+          </tbody>
+        {% endfor %}
+        </table>
+    </div>
+    <div style="">
       {% if  is_paginated %}
       <div class="pagination" style="color:#fff; display:flex; margin-left:45%;">
         <ul style="display:flex; list-style:none;">
@@ -32,7 +43,6 @@
           {% else %}
             <li><a  class="disabled"></a></li>
           {% endif %}
-
           {% for pages in page_obj.paginator.page_range %}
             {% if page_obj.next_page_number == pages %}
               <li><a href="" style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;">{{pages}}</a></li>
@@ -49,6 +59,6 @@
         </ul>
         </div>
         {% endif %}
-         </div>
+         </div>      
 </body>
-</html>
+{% endblock content %}
