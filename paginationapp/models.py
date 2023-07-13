@@ -36,3 +36,9 @@ class Book(models.Model):
     def __str__(self):
         return self.title
     
+class UserData(models.Model):
+    user = models.TextField(default=None)
+    
+    def __str__(self):
+        return self.user
+    

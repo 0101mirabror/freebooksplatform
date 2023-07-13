@@ -1,2 +1,0 @@
-- add template, base.html and extend it
-- add author model and filter by it

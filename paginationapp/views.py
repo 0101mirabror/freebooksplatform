@@ -4,6 +4,7 @@ from django.db.models.query import QuerySet
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView
+from django.db.models import Q
 from. import models
 
 class BookListView(ListView):
@@ -39,6 +40,32 @@ class BookDetailView(DetailView):
         object.views_count += 1
         object.save()
         return object
+    
+    # def get(self, request, pk, *args, **kwargs):
+    #     def get_ip(request):
+    #         adress = request.META.get('HTTP_X_FORWARDED_FOR')
+    #         # print(request.META)
+    #         if adress:
+    #             ip = adress.split(',')[-1].strip()
+    #             print(adress.split(',')[-1].strip(), '\n\n\n')
+    #         else:
+    #             ip = request.META.get('REMOTE_ADDR')
+    #         return ip
+    #     ip = get_ip(request)
+    #     u = models.UserData(user=ip)
+    #     print("ip address:", ip)
+    #     result = models.UserData.objects.filter(Q(user__icontains=ip))
+    #     if len(result) == 1:
+    #         print("user exists")
+    #     elif len(result) > 1:
+    #         print('user exists')        
+    #     else:
+    #         u.save()
+    #         print('user is unique')
+    #     count = models.UserData.objects.all().count()
+    #     print("total users count is ", count)
+    #     return render(request, 'book_detail.html', {'count': count})
+
 class AuthorListView(ListView):
     model = models.Author
     template_name = "author_list.html"
