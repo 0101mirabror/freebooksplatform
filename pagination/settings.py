@@ -29,12 +29,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',\
     'django.contrib.sites',
     'paginationapp.apps.PaginationappConfig',
+    'accounts.apps.AccountsConfig',
 
         'allauth',
     'allauth.account',
     'allauth.socialaccount',
 ]
 
+AUTH_USER_MODEL = "accounts.CustomUser"
 
 AUTHENTICATION_BACKENDS = [
     
@@ -46,6 +48,8 @@ AUTHENTICATION_BACKENDS = [
     
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,7 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+ ]
 
 ROOT_URLCONF = 'pagination.urls'
 
