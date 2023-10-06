@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="form">
+        <h2>
+            Kitob Qo'shish
+        </h2>
+        <form  method="POST" action="{% url 'books:save_book' %}" enctype="multipart/form-data">
+            {% comment %} <label for="author">Author</label>
+            <select  width=400px name="author" id="author">
+                {% for author in authors %}
+                <option value={{author}}>{{author.firstname}} {{author.lastname}}</option>
+                {% endfor %}
+              </select> {% endcomment %}
+              {% csrf_token %}
+              <label for="title">Kitob nomi</label>
+            <input type="text" name="title" id="title">
+              <label for="duration">Betlar soni</label>
+            <input type="text" name="duration" id="duration">
+              <label for="image">Muqova</label>
+            <input type="file" name="image" style="background-color: #fff; " id="image">
+            <label for="pdf">Pdf fayl</label>
+            <input type="file" name="pdf" style="background-color: #fff; " id="pdf">
+            <button class="login" type="submit"  action="check" value="addbook">Qo'shish</button>
+        </form>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<body style="height:100vh; margin-start:50px; margin-end:50px;">
+  <div style="d-flex" class="d-flex container">
+     <table class="table table-striped justify-content-center">
+      <thead>
+        <tr>
+          <th scope="col" style="text-align:center" >No</th>
+          <th scope="col" style="text-align:center">Kitob</th>
+          <th scope="col" style="text-align:center">Kitob nomi</th>
+          <th scope="col" style="text-align:center">Mavjud kitoblari</th>
+          <th scope="col" style="text-align:center">Tug'ilgan sana</th>
+        </tr>
+      </thead>
+      {% for author in object_list %}
+        <tbody>
+          <tr>
+            <th style="text-align:center" scope="row">{{forloop.counter}}</th>
+            <td style="text-align:center"><a href="{% url 'books:author_detail' author.slug %}"><img width=100px height=150px src="{{author.image.url}}"></img></td>
+            <td style="text-align:center"> {{ author.firstname}} {{author.lastname }}</td>
+            <td style="text-align:center">{{ author.books_number }}</td>
+            <td style="text-align:center">{{author.birthdate }}</td>
+          </tr>
+        </tbody>
+      {% endfor %}
+      </table>
+  </div>
+      <div style="">
+      {% if  is_paginated %}
+      <div class="pagination" style="color:#fff; display:flex; margin-left:45%;">
+        <ul style="display:flex; list-style:none;">
+          {% if page_obj.has_previous %}
+            <li ><a style="border:1px white solid; background: green; padding:10px; color:#fff; border-color:#fff; text-decoration:none;" href="?page={{page_obj.previous_page_number}}">Prev</a></li>
+          {% else %}
+            <li><a  class="disabled"></a></li>
+          {% endif %}
+
+          {% for pages in page_obj.paginator.page_range %}
+            {% if page_obj.next_page_number == pages %}
+              <li><a href="" style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;">{{pages}}</a></li>
+            {% else %}
+              <li><a style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;" href="?page={{pages}}">{{pages}}</a></li>
+            {% endif %}
+          {% endfor %}
+
+          {% if page_obj.has_next %}
+            <li><a  style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;" href="?page={{page_obj.next_page_number}}">Next</a></li>
+          {% else %}
+            <li><a  class="disabled"></a></li>
+          {% endif %}
+        </ul>
+        </div>
+        {% endif %}
+         </div> 
+</body>
+{% endblock content %}
