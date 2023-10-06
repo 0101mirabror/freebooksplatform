@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Homepage(Kitoblar)
 
 ![image](https://github.com/0101mirabror/freebooksplatform/assets/99737165/a29aae2f-0205-4acf-a5bb-d85cc4635277)
@@ -28,3 +29,5 @@
 
 - add template, base.html and extend it
 - add author model and filter by it
+=======
+>>>>>>> day_night_mode1
