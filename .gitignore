@@ -2,3 +2,5 @@ venv/
 .venv
 */venv/
 paginaionapp/migrations/__pycache__/
+/paginationapp/migrations/
+/accounts/migrations/

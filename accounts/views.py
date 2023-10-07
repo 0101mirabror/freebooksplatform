@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import CustomUser
 from .forms import CustomUserCreationForm, LoginForm
 from django.contrib.auth import login,  authenticate
-def profileView(request):
+def profileView(request, pk):
     pk = request.user.id
     print(f"\n\n PROFILE VIEW = {pk}\n\n")
     user = CustomUser.objects.get(id=pk)
@@ -38,3 +38,9 @@ def login_user(request):
     else:
         form = LoginForm()
     return render(request, 'login.html', {"form": form})
+
+from django.contrib.auth import logout
+
+def logout_user(request):
+    logout(request)
+    return redirect('/books/')
