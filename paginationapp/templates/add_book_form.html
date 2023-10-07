@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if user.is_authenticated%}
     <div class="form">
         <h2>
             Kitob Qo'shish
@@ -23,5 +24,8 @@
             <button class="login" type="submit"  action="check" value="addbook">Qo'shish</button>
         </form>
     </div>
+  {% else %}
+   <p>Siz ro'yxatdan o'tmagansiz</p>
+   {% endif %}
 
 {% endblock content %}

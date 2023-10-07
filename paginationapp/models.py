@@ -12,7 +12,7 @@ class Author(models.Model):
     lastname = models.CharField(max_length=20, null=True, blank=True)
     birthdate = models.DateField(null=True, blank=True)
     life = models.TextField()
-    image = models.ImageField(upload_to='author_images')
+    image = models.ImageField(upload_to='author_images', null=True, blank=True)
     slug = models.SlugField(blank=True, null=True)
     books_number = models.IntegerField(default=0)
 
@@ -29,7 +29,7 @@ class Book(models.Model):
     title = models.CharField(max_length=50)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, null=True, blank=True)
     duration = models.IntegerField()
-    image = models.ImageField(upload_to='media/books')
+    image = models.ImageField(upload_to='media/books', null=True, blank=True, default="author_images/images.png")
     category = models.CharField(choices=CHOOSE_CATEGORY, max_length=4)
     pdf = models.FileField(upload_to="pdf_books")
     views_count = models.IntegerField(null=True, blank=True, default=0)

@@ -164,4 +164,9 @@ venv/
 .venv
 */venv/
 paginaionapp/migrations/__pycache__/
+<<<<<<< HEAD
+>>>>>>> version1
+=======
+/paginationapp/migrations/
+/accounts/migrations/
 >>>>>>> version1

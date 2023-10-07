@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
-        {{ user }}
-        {{ user.username}}
-        {{ pk }}
+        <div class="container mt-5">
+        <a href="{% url 'books:add_book' %}"> Kitob qo'shish</a><p>
+        username: {{ user }} <p>
+        username: {{ user.username}}<p>
+        user id: {{ pk }}<p>
+        user emial: {{ user.email}}<p>
+       <a href="{% url 'account:logout-user' %}"><button type="button">Logout</button></a>
+</div>
 {% endblock content %}

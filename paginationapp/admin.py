@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Book, Author
 from django.contrib.auth.admin import UserAdmin
+from django import forms
 
 class BookAdmin(admin.ModelAdmin):
     model = Book
@@ -9,7 +10,9 @@ class BookAdmin(admin.ModelAdmin):
         "title",
         "author"
         
-    ]  
+    ]
+    widgets = {
+            'image': forms.TextInput(attrs={'required': False} ) }
 
 admin.site.register(Book, BookAdmin)
 admin.site.register(Author)
