@@ -44,3 +44,10 @@ from django.contrib.auth import logout
 def logout_user(request):
     logout(request)
     return redirect('/books/')
+
+def list_user(request, limit=200):
+    users = CustomUser.objects.all()[:200]
+    context = {
+        "users": users
+    }
+    return render(request, "list_user.html", context)

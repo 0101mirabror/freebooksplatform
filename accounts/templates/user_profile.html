@@ -2,10 +2,15 @@
 {% block content %}
         <div class="container mt-5">
         <a href="{% url 'books:add_book' %}"> Kitob qo'shish</a><p>
-        username: {{ user }} <p>
+         
         username: {{ user.username}}<p>
         user id: {{ pk }}<p>
         user emial: {{ user.email}}<p>
+              
        <a href="{% url 'account:logout-user' %}"><button type="button">Logout</button></a>
+       {% if user.is_superuser %}
+       <a href="http://localhost:8000/admin/"><button type="button">Admin panel</button></a>
+       {% endif %}
+        
 </div>
 {% endblock content %}

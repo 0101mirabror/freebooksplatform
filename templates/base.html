@@ -32,6 +32,7 @@
                       </div>
                 </li>
                 <li><a href="{% url 'books:authors_list' %}">Mualliflar</a></li>
+                <li><a  href="{% url 'account:list-user' %}">Sayt foydalanuvchilari</a></li>
                 {% comment %} <li><a href="#"> Profile</a></li> {% endcomment %}
             </ul>
         </div>
@@ -43,7 +44,7 @@
         </div>
         <div class="profile">
             {% if user.pk %}
-                <a href="{% url "account:user"  user.pk %}"><img src="{% static 'images/profile.png'%}" alt="profile photo"></a>
+                <a href="{% url "account:user"  user.pk %}"><img style="border-radius:50%;" src="{% if user.image.url %}{{user.image.url}}{% endif %}" alt="profile photo"></a>
             {% else %}
                 <a class="me-2" href="{% url "account:register-user" %}"> 
                     <b>Register</b>

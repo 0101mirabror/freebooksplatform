@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+ 
+ <div style="d-flex" class="d-flex container">
+    <table class="table table-striped justify-content-center">
+     <thead>
+       <tr>
+         <th scope="col" style="text-align:center " >No</th>
+         <th scope="col" style="text-align:center ">Username</th>
+         <th scope="col" style="text-align:center">Email</th>
+         <th scope="col" style="text-align:center">Image</th>
+         <th scope="col" style="text-align:center">---</th>
+       </tr>
+     </thead>
+     {% for user in users %}
+      
+       <tbody  >
+         <tr>
+           <th style="text-align:center " scope="row">{{forloop.counter}}</th>
+           <td style="text-align:center"> {{ user.username }}</td>
+           <td style="text-align:center">{{ user.email}}</td>
+           <td style="text-align:center"><a href=" "><img width=100px height=150px src="{{user.image.url}}"></img></td>
+           {% comment %} <td style="text-align:center">{{author.birthdate }}</td> {% endcomment %}
+         </tr>
+       </tbody>
+     {% endfor %} 
+     </table>
+ </div>
+
+{% endblock content %}

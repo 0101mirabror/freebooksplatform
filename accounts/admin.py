@@ -11,12 +11,16 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
+    fieldsets = UserAdmin.fieldsets + (
+        ('Custom Fields', {'fields':('image',)}),
+    )
     list_display = [
         "id",
         "email",
         "username",
         "is_superuser",
-        "is_staff"
+        "is_staff",
+        "image"
     ]  
 
 admin.site.register(CustomUser, CustomUserAdmin)

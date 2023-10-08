@@ -8,7 +8,7 @@ class CustomUser(AbstractUser):
    username = models.CharField(max_length=20, unique=True)
    firstname = models.CharField(max_length=20)
    lastname = models.CharField(max_length=20)
-   image = models.ImageField(upload_to="media/profile_pictures", null=True, blank=True)
+   image = models.ImageField(upload_to="media/profile_pictures", default="author_images/profile.png",null=True, blank=True)
    # slug = models.SlugField()
    # def save(self, *args, **kwargs):
    #     if not self.slug:

@@ -134,3 +134,12 @@ def book_post(request, *args, **kwargs):
     #     context = super(BookCategory, self).get_context_data(**kwargs)
     #     context['book_category'] = self.category
     #     return context
+
+def book_payment(request, pk):
+    context = {
+
+    }
+    return render(request, "payment.html", context)
+
+def custom_404(request,exception):
+    return render(request, "404.html", status=404)
