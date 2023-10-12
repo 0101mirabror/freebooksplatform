@@ -17,7 +17,7 @@
         <tbody  >
           <tr>
             <th style="text-align:center " scope="row">{{forloop.counter}}</th>
-            <td style="text-align:center"><a href="{% url 'books:author_detail' author.slug %}"><img width=100px height=150px src="{{author.image.url}}"></img></td>
+            <td style="text-align:center"><a href="{% url 'books:author_detail' author.slug %}"><img width=100px height=150px src="{% if author.image %}{{author.image.url}}{% endif %}"></img></td>
             <td style="text-align:center"> {{ author.firstname}} {{author.lastname }}</td>
             <td style="text-align:center">{{ author.books_number }}</td>
             <td style="text-align:center">{{author.birthdate }}</td>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-        <div class="container mt-5">
+<div class="container mt-5 shadow p-5 " style="border-radius:5px">
         <a href="{% url 'books:add_book' %}"> Kitob qo'shish</a><p>
          
         username: {{ user.username}}<p>
@@ -8,9 +8,18 @@
         user emial: {{ user.email}}<p>
               
        <a href="{% url 'account:logout-user' %}"><button type="button">Logout</button></a>
+       <a href="{% url 'account:edit-profile' %}"><button type="button">Profile edit</button></a>
        {% if user.is_superuser %}
        <a href="http://localhost:8000/admin/"><button type="button">Admin panel</button></a>
        {% endif %}
         
 </div>
+{% if books %}
+<div class="container mt-5 shadow p-5 " style="border-radius:5px">
+        <p><b> Tahrirlash </b></p>
+        {% for book in books %}
+        <a href="{% url 'books:book_edit' book.pk%}"> <img class="me-1" src="{{book.image.url}}" height="200px" width="120px"></a>
+        {% endfor %}
+</div>
+{%  endif %}
 {% endblock content %}

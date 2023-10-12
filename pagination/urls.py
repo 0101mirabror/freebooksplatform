@@ -7,7 +7,9 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('paginationapp.urls', namespace='books')),
-    path('accounts/', include('accounts.urls', namespace='account')),
+    path('account/', include('accounts.urls', namespace='account')),
+    path('accounts/', include('allauth.urls')),
+
 ]
 
 

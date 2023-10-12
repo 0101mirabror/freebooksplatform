@@ -27,7 +27,7 @@
               <th scope="row">{{forloop.counter}}</th>
               <td><a href="{% url 'books:book_detail' book.pk  %}"><img width=100px height=150px src="{{book.image.url}}"></img></a></td>
               <td> {{ book.title}}</td>
-              <td>{{book.author.firstname }}</td>
+              <td>{{book.author.firstname }} {{book.author.lastname }}</td>
               <td>{{book.duration }}</td>
             </tr>
           </tbody>

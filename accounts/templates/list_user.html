@@ -11,7 +11,7 @@
          <th scope="col" style="text-align:center ">Username</th>
          <th scope="col" style="text-align:center">Email</th>
          <th scope="col" style="text-align:center">Image</th>
-         <th scope="col" style="text-align:center">---</th>
+         <th scope="col" style="text-align:center">Oxirgi kirish</th>
        </tr>
      </thead>
      {% for user in users %}
@@ -22,7 +22,7 @@
            <td style="text-align:center"> {{ user.username }}</td>
            <td style="text-align:center">{{ user.email}}</td>
            <td style="text-align:center"><a href=" "><img width=100px height=150px src="{{user.image.url}}"></img></td>
-           {% comment %} <td style="text-align:center">{{author.birthdate }}</td> {% endcomment %}
+           <td style="text-align:center">{{user.last_login}}</td>
          </tr>
        </tbody>
      {% endfor %} 

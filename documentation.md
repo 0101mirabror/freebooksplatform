@@ -31,3 +31,6 @@
 - add author model and filter by it
 =======
 >>>>>>> day_night_mode1
+
+
+- google authentication olish va ro'yxatdan o'tish uchun url: https://console.cloud.google.com/apis/

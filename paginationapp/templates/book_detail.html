@@ -25,6 +25,10 @@
                         <th scope="row">Ko'rishlar soni</th>
                         <td>{{object.views_count}}</td>
                       </tr>        
+                      <tr>
+                        <th scope="row">Qo'shdi</th>
+                        <td>{{object.owner}}</td>
+                      </tr>        
                       <tr >
                         <th scope="row">
                             <a href="{{object.pdf.url}}" target="_blank"><button type="button" class="btn btn-primary btn-sm"> Ko'rish</button> </a>                   
@@ -36,5 +40,9 @@
                   </table>
                 </div>  
           </div>   {{count}}
+    </div>
+
+    <div class="container">
+
     </div>
 {% endblock content %}

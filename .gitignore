@@ -163,6 +163,7 @@ cython_debug/
 venv/
 .venv
 */venv/
+*/virt/
 paginaionapp/migrations/__pycache__/
 <<<<<<< HEAD
 >>>>>>> version1
@@ -170,3 +171,7 @@ paginaionapp/migrations/__pycache__/
 /paginationapp/migrations/
 /accounts/migrations/
 >>>>>>> version1
+
+# kalitlar
+*.env
+*.db_version3.sqlite3

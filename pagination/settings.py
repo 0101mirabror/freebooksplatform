@@ -1,6 +1,12 @@
-
+import os
+from dotenv import load_dotenv
 from pathlib import Path
 
+
+if os.path.exists(".env"):
+    load_dotenv(".env")
+
+SECRET_KEY=os.getenv("SECRET_KEY")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -8,8 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-+j*^h0emlhc44=f549cnvcti=(lwov@_!(ld0tztyz+%2=z*26'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -25,30 +30,21 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',\
     'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
     'paginationapp.apps.PaginationappConfig',
     'accounts.apps.AccountsConfig',
-
-        'allauth',
+    'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.github',
+    # 'allauth.socialaccount.providers.yandex',
+    # 'allauth.socialaccount.providers.facebook',
 ]
+ 
 
-AUTH_USER_MODEL = "accounts.CustomUser"
-
-AUTHENTICATION_BACKENDS = [
-    
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-    
-]
-
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,9 +54,42 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',    
  ]
 
 ROOT_URLCONF = 'pagination.urls'
+
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+
+# ACCOUNT_EMAIL_VERIFICATION = 'fayzullayevmirabror1@gmail.com'
+ 
+SITE_ID = 2
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        # 'OAUTH_PKCE_ENABLED': True,
+        'APP': {
+            'client_id': '512446414786-3d58iae2a1d4bkfvaus3ta0fbuvgicsr.apps.googleusercontent.com',
+            'secret': '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',
+            'key': '',
+        }
+    }
+}
+
+
 
 TEMPLATES = [
     {
@@ -78,7 +107,17 @@ TEMPLATES = [
         },
     },
 ]
+AUTHENTICATION_BACKENDS = [
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
 
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+   
+     
+    
+]
 WSGI_APPLICATION = 'pagination.wsgi.application'
 
 

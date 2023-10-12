@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 from django.conf.urls import handler404
 
 handler404 = 'paginationapp.views.custom_404'
 app_name="paginationapp"
 urlpatterns = [
-    path('books/', views.BookListView.as_view() ,name="books_list"),
+    path('', views.BookListView.as_view() ,name="books_list"),
     path('authors/', views.AuthorListView.as_view() ,name="authors_list"),
     path('book/<int:pk>',  views.BookDetailView.as_view() ,name="book_detail"),
     path('author/<slug:slug>',  views.AuthorDetailView.as_view() ,name="author_detail"),
@@ -14,4 +14,7 @@ urlpatterns = [
     path('addbook/',  views.AddBookView.as_view() ,name="add_book"),
     path('savebook/',  views.book_post ,name="save_book"),
     path('book/product/<int:pk>/payment',  views.book_payment ,name="payment"),
+    path('book/<int:pk>/edit/', views.BookModelUpdateView.as_view(), name='book_edit'),
+   
+    
 ]
