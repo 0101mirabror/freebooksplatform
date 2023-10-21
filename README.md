@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# freebooksplatform
-=======
-# freebooksplatform
----
 ### branch master
 # Homepage(Kitoblar)
 
