@@ -19,3 +19,9 @@ profile sahifasi qo'shildi
 https://www.codesnail.com/django-allauth-email-authentication-tutorial/
 - kitob qo'shgan foydalanuvchilarning qo'shmagan va ro'yxatdan o'tgan foydalanuvchialrga nisbatini ko''rsatish
 - ko'p kitob qo'shgan foydalanuvchini userlar ro'yxatida tepaga chiqarish
+
+
+- add template, base.html and extend it
+- add author model and filter by it
+
+>>>>>>> version1
