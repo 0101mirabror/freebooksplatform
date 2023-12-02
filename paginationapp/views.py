@@ -176,4 +176,11 @@ class BookModelUpdateView(UpdateView):
  
 
 
- 
+from django.views.generic import TemplateView
+
+class GenresView(TemplateView):
+    template_name = 'genres.html'
+
+
+
+

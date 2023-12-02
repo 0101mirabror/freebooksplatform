@@ -25,7 +25,7 @@ ALLOWED_HOSTS = ["ab02-185-213-230-53.ngrok-free.app", "localhost", "127.0.0.1",
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    'jazzmin', # custom admin package
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -33,28 +33,40 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'paginationapp.apps.PaginationappConfig',
-    'accounts.apps.AccountsConfig',
-    'allauth',
+    'paginationapp.apps.PaginationappConfig', # local
+    'accounts.apps.AccountsConfig', # local
+    'markdownx', # django-markdownx
+    'rest_framework', # djangorestframework
+    'allauth', # django-allauth
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-    # 'allauth.socialaccount.providers.github',
-    # 'allauth.socialaccount.providers.yandex',
-    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.github',
 ]
+
+ 
+
+REST_FRAMEWORK = {
+     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    # user has to send login credentials
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated', ] 
+ 
+}
  
 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'allauth.account.middleware.AccountMiddleware',    
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',    
  ]
 
 ROOT_URLCONF = 'pagination.urls'
@@ -85,6 +97,18 @@ SOCIALACCOUNT_PROVIDERS = {
             'client_id': '512446414786-3d58iae2a1d4bkfvaus3ta0fbuvgicsr.apps.googleusercontent.com',
             'secret': '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',
             'key': '',
+        }
+    },
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
+        'APP': {
+            'client_id': '97ce47385a9c3a6da097',
+            'secret': '911f9e67b9b83593ec3c092cabd632ad87f12f2c',
+            'key': ''
         }
     }
 }
@@ -185,3 +209,13 @@ JAZZMIN_SETTINGS = {
      "site_title": "Admin Panel",
      "site_header": "Library",
 }
+
+# SMTP settings //begin //version4
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'fayzullayevmirabror3@gmail.com'
+EMAIL_HOST_PASSWORD = 'bvpfijgpdkzpcoha'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# SMTP settings //end // version4

@@ -1,0 +1,14 @@
+{% autoescape off %}
+Hi {{ user }},
+
+Please click on the link below to confirm your registration:
+
+{% comment %} {{ protocol }}://{{ domain }}{% url 'account:verify' token=token %} {% endcomment %}
+
+
+Salom {{ user }},
+
+Ro'yxatdan o'tishni tasdiqlash uchun quyidagi link ustiga bosing:
+
+{{ protocol }}://{{ domain }}{% url 'account:verify' token=token %}
+{% endautoescape %}

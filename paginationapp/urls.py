@@ -15,6 +15,7 @@ urlpatterns = [
     path('savebook/',  views.book_post ,name="save_book"),
     path('book/product/<int:pk>/payment',  views.book_payment ,name="payment"),
     path('book/<int:pk>/edit/', views.BookModelUpdateView.as_view(), name='book_edit'),
+    path('genres/', views.GenresView.as_view(), name='books_genres'),
    
     
 ]
