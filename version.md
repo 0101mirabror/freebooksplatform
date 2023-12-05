@@ -19,17 +19,21 @@ profile sahifasi qo'shildi
 1. loginga twilio orqali sms xabarnoma yuborildi tizimga kirganlik to'g'risida.
 2. gmail verification is added(not working)
 3. sign up view is designed.
+4. project title is changed.
+5. searchbar is changed.
+6. project name is changed.
+7. DRF is added
+8. IsAuthenticated permission class is added
 
-## version 5 
-1. DRF is added
-2. IsAuthenticated permission class is added
-3. 
+## version 5
+
+1. footer is added.
 
 ## must done
 
 - email verification add to project
   https://www.codesnail.com/django-allauth-email-authentication-tutorial/
-- kitob qo'shgan foydalanuvchilarning qo'shmagan va ro'yxatdan o'tgan foydalanuvchialrga nisbatini ko''rsatish
+- kitob qo'shgan foydalanuvchilarning qo'shmagan va ro'yxatdan o'tgan foydalanuvchilarga nisbatini ko''rsatish
 - ko'p kitob qo'shgan foydalanuvchini userlar ro'yxatida tepaga chiqarish
 
 MArkdown ishlmadi

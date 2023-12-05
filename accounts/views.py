@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from .models import CustomUser, Profile
 from .forms import CustomUserCreationForm, LoginForm, CustomUserChangeForm
 from django.contrib.auth import login,  authenticate
-from paginationapp.models import Book
+from bookhiveapp.models import Book
 from django.contrib import messages
 from .tokens import send_mail_after_registration
 def token_send (request):

@@ -6,9 +6,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 """DJANGO REST FRAMEWORK IMPORTS"""
-# from django.urls import include, path
+ 
 from rest_framework import routers
-from paginationapp.apiviews import BookModelViewSet, BookModelDetailView, UserModelViewSet
+from bookhiveapp.apiviews import BookModelViewSet, BookModelDetailView, UserModelViewSet
 
 '''
 DJANGO REST FRAMEWORK:[begin]
@@ -25,7 +25,7 @@ DJANGO REST FRAMEWORK:[end]'''
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('paginationapp.urls', namespace='books')),
+    path('', include('bookhiveapp.urls', namespace='books')),
     path('account/', include('accounts.urls', namespace='account')),
     path('accounts/', include('allauth.urls')),
     # djangorestframework url routes

@@ -2,8 +2,8 @@ from django.urls import path, include
 from . import views
 from django.conf.urls import handler404
 
-handler404 = 'paginationapp.views.custom_404'
-app_name="paginationapp"
+handler404 = 'bookhiveapp.views.custom_404'
+app_name="bookhiveapp"
 urlpatterns = [
     path('', views.BookListView.as_view() ,name="books_list"),
     path('authors/', views.AuthorListView.as_view() ,name="authors_list"),

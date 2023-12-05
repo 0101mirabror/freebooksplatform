@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'paginationapp.apps.PaginationappConfig', # local
+    'bookhiveapp.apps.BookhiveappConfig', # local
     'accounts.apps.AccountsConfig', # local
     'markdownx', # django-markdownx
     'rest_framework', # djangorestframework
@@ -69,7 +69,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
  ]
 
-ROOT_URLCONF = 'pagination.urls'
+ROOT_URLCONF = 'django_project.urls'
 
 AUTH_USER_MODEL = "accounts.CustomUser"
 
@@ -126,7 +126,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'paginationapp.book_context.count_author_books',
+                'bookhiveapp.book_context.count_author_books',
             ],
         },
     },
@@ -142,7 +142,7 @@ AUTHENTICATION_BACKENDS = [
      
     
 ]
-WSGI_APPLICATION = 'pagination.wsgi.application'
+WSGI_APPLICATION = 'django_project.wsgi.application'
 
 
 # Database
