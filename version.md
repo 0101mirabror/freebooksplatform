@@ -28,7 +28,10 @@ profile sahifasi qo'shildi
 ## version 5
 
 1. footer is added.
-
+2. input form border is removed.
+3. dropdown input is added for book's author.
+4. background image is added.
+5. Login bug is fixed.
 ## must done
 
 - email verification add to project

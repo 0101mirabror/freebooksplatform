@@ -107,17 +107,17 @@ def login_user(request):
             if user is not None:
                 login(request, user)
                 # userga tizimga kirganligi haqida sms xabarnoma keladi
-                account_sid = 'ACdce79ad6537cd422afa74f133b92efd4'
-                auth_token = 'fba8e82ba9ea1f8fde2242add0fe7717'
-                client = Client(account_sid, auth_token)
+                # account_sid = 'ACdce79ad6537cd422afa74f133b92efd4'
+                # auth_token = 'fba8e82ba9ea1f8fde2242add0fe7717'
+                # client = Client(account_sid, auth_token)
 
-                message = client.messages \
-                            .create(
-                                 body=f"{username}, siz tizimga muvaffaqiyatli kirdingiz!!!",
-                                 from_='+12562903985',
-                                 to='+998971010158'
-                             )  
-                print(message.sid)
+                # message = client.messages \
+                #             .create(
+                #                  body=f"{username}, siz tizimga muvaffaqiyatli kirdingiz!!!",
+                #                  from_='+12562903985',
+                #                  to='+998971010158'
+                #              )  
+                # print(message.sid)
                 return redirect('/')
             else: 
                 form.add_error(None, "Invalid username or password.")

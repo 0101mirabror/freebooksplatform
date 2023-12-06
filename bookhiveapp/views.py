@@ -128,11 +128,15 @@ class AddBookView(TemplateView):
     
 def book_post(request, *args, **kwargs):
     if request.method == 'POST':
+        owner = request.user
+        writer = request.POST.get('author')
+        author = models.Author.objects.get(firstname=writer)
+        print(author,"\n\n\n\n\n\n\n\n", request.POST, writer)
         title = request.POST.get('title')  
         duration = request.POST.get('duration')  
         image = request.FILES.get('image')
         pdf = request.FILES.get('pdf')
-        book = models.Book( duration=duration, image=image, pdf=pdf )
+        book = models.Book(owner=owner, author=author, title=title, duration=duration, image=image, pdf=pdf )
         book.save()
         messages.success(request, 'Book is saved successfully!')
         return redirect('/')
@@ -180,6 +184,16 @@ from django.views.generic import TemplateView
 
 class GenresView(TemplateView):
     template_name = 'genres.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        dic = {
+            'badiiy': Book.objects.filter(category="RM").count(),
+            'diniy': Book.objects.filter(category="CM").count(),
+            'maktab': Book.objects.filter(category="MD").count(),
+            'bolalar': Book.objects.filter(category="SH").count(),      
+        }
+        context['quantity'] = dic
+        return context
 
 
 
