@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="shadow row" style="padding:5px; margin-top:5px; border-radius:5px;">
+            <div class="col-4">
+                <img  class="" style="width:200px; height:300px;" src="{{object.image.url}}"></img>
+            </div>
+            <div class="col-6 m-2">
+                <table class="table">
+                    <tbody>
+                      <tr>
+                        <th scope="row">Kitob nomi</th>
+                        <td>{{object.title}}</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">Muallifi</th>
+                        <td>{{object.author.firstname}} {{object.author.lastname}}</td>
+                       </tr>
+                      <tr>
+                        <th scope="row">Sahifalar soni</th>
+                        <td>{{object.duration}}</td>
+                      </tr>        
+                      <tr>
+                        <th scope="row">Ko'rishlar soni</th>
+                        <td>{{object.views_count}}</td>
+                      </tr>        
+                      <tr>
+                        <th scope="row">Qo'shdi</th>
+                        <td>{{object.owner}}</td>
+                      </tr>        
+                      <tr >
+                        <th scope="row">
+                            <a href="{{object.pdf.url}}" target="_blank"><button type="button" class="btn btn-primary btn-sm"> Ko'rish</button> </a>                   
+                        </th>
+                        <td>
+                            <a href="{{object.pdf.url}}"><button type="button" class="btn btn-primary btn-sm">Yuklab olish</button></a>
+                        </td>
+                           {% comment %} <embed src="{{object.pdf.url}}" width="100%" height="700px"/> {% endcomment %}
+                            {% comment %} <iframe href="{{object.pdf.url}}" width="100%" height="700px"></iframe> {% endcomment %}         
+                      </tr>        
+                  </table>
+                </div>  
+          </div>   {{count}}
+    </div>
+
+    <div class="container">
+
+    </div>
+{% endblock content %}

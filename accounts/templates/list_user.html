@@ -22,7 +22,7 @@
            <td style="text-align:center"> {{ user.username }}</td>
            <td style="text-align:center">{{ user.email}}</td>
            <td style="text-align:center"><a href=" "><img width=100px height=150px src="{{user.image.url}}"></img></td>
-           <td style="text-align:center">{{user.last_login}}</td>
+           <td style="text-align:center">{% if user.last_login %} {{user.last_login}} {% else %} aktiv emas {% endif %}</td>
          </tr>
        </tbody>
      {% endfor %} 

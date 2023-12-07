@@ -27,7 +27,4 @@
 ![image](https://github.com/0101mirabror/freebooksplatform/assets/99737165/e6198fda-7892-43a6-b960-d1a60ac6b797)
 
 
-- add template, base.html and extend it
-- add author model and filter by it
 
->>>>>>> version1

@@ -15,3 +15,13 @@ class CustomUser(AbstractUser):
    #         self.slug = slugify(self.title)
    #     super(CustomUser, self).save(*args, **kwargs)
  
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    auth_token = models.CharField(max_length=100)
+    is_verified = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
+    

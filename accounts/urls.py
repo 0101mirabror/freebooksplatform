@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import profileView, register_user, login_user, logout_user, list_user, edit_profile
+from .views import *
 app_name = "accounts"
 urlpatterns = [
     path("<int:pk>/", view=profileView, name="user"),
@@ -8,5 +8,9 @@ urlpatterns = [
     path("logout/", view=logout_user, name="logout-user"),
     path("users/", view=list_user, name="list-user"),
     path("profile/edit", view=edit_profile, name="edit-profile"),
+    path('token' , view=token_send , name='token_send'),
+    path('success' , view=success, name ='success'),
+    path('error' , view=error_page , name = "error"),
+    path('verify/<token>' , verify ,name = "verify"),
      
 ]

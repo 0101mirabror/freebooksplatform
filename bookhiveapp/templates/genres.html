@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+ <div class="container d-block">
+    
+  <div class="mb-3"><b  href=" " role="button" >
+      Janrni tanlang 
+    </b></div>
+     
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'RM' %}">Badiiy adabiyot({{quantity.badiiy}})</a>      
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'CM' %}">Diniy adabiyot({{quantity.diniy}})</a>    
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'SH' %}">Bolalar adabiyoti({{quantity.bolalar}})</a>
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'MD' %}">Maktab darsliklari({{quantity.maktab}})</a>
+    
+</div>
+{% endblock content%}

@@ -69,6 +69,10 @@ body
 {   
     background-color:beige;
     height: 100vh;
+    /* background image section */
+     
+    background-repeat: no-repeat;
+    background-size: cover;
 
 }
 
@@ -106,6 +110,10 @@ input{
     border: 0 #fff solid;
     box-sizing: border-box;
 }
+input:focus {
+    outline: none;
+  }
+
 .form form .login{
     background-color:royalblue;
     color: #fff;
@@ -122,3 +130,4 @@ label
 {
    padding-bottom: 10px; 
 }
+
