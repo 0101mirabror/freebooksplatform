@@ -43,3 +43,4 @@ profile sahifasi qo'shildi
 
  
 MArkdown ishlmadi
+>>>>>>> f4d07482bf21078341dd351621db3b50bd09fe21
