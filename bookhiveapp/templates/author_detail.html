@@ -1,12 +1,10 @@
 {% extends 'base.html' %}
-
 {% block content %}
     <div class="container">
         <div class=" shadow  m-2 row" style="padding:5px; margin-top:5px; border-radius:5px;">
             <div class="col-4">
                 <img  style="width:200px; height:250px;" src="{{author.image.url}}"></img>
             </div>
-            {% comment %} {{context}} {% endcomment %}
             <div class="col-6 m-2">
                 <p><b>Yozuvchi:</b>  {{author.firstname}} {{author.lastname}}</p>
                 <p></b>{{author.life}}</p> 
@@ -17,7 +15,6 @@
             <hr>
                 {% for book in booklist %}
                 <a href="{% url 'books:book_detail' book.pk %}"><img  class=" shadow m-2" style="width:200px; height:250px;" src="{{book.image.url}}"></img></a>
-                {% comment %} <p>{{book.title}}</p> {% endcomment %}
                 {% endfor %} 
             
         </div>

@@ -32,6 +32,7 @@ profile sahifasi qo'shildi
 3. dropdown input is added for book's author.
 4. background image is added.
 5. Login bug is fixed.
+6. Book size calculating function is added
 ## must done
 
 - email verification add to project
@@ -40,6 +41,6 @@ profile sahifasi qo'shildi
 - ko'p kitob qo'shgan foydalanuvchini userlar ro'yxatida tepaga chiqarish
 - add template, base.html and extend it
 - add author model and filter by it
-
+- make online pdf opener
  
 MArkdown ishlmadi

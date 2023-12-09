@@ -8,14 +8,14 @@
      <thead>
        <tr>
          <th scope="col" style="text-align:center " >No</th>
-         <th scope="col" style="text-align:center ">Username</th>
+         <th scope="col" style="text-align:center ">Foydalanuvchi nomi</th>
          <th scope="col" style="text-align:center">Email</th>
-         <th scope="col" style="text-align:center">Image</th>
+         <th scope="col" style="text-align:center">Rasm</th>
          <th scope="col" style="text-align:center">Oxirgi kirish</th>
        </tr>
      </thead>
      {% for user in users %}
-      
+        {% if not user.is_superuser %}
        <tbody  >
          <tr>
            <th style="text-align:center " scope="row">{{forloop.counter}}</th>
@@ -25,6 +25,7 @@
            <td style="text-align:center">{% if user.last_login %} {{user.last_login}} {% else %} aktiv emas {% endif %}</td>
          </tr>
        </tbody>
+       {% endif %}
      {% endfor %} 
      </table>
  </div>

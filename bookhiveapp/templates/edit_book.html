@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <div class="container p-5" style="border-radius:5px">
-     <h2>Edit YourModel</h2>
+  <div class="container p-5 mt-2" style="border-radius:5px">
+     <h2>Kitobni tahrirlang</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save</button>
+    <button type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>
 {% endblock %}

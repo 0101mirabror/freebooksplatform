@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
-
 {% block content %}
-    <div class="container">
-        <div class="shadow row" style="padding:5px; margin-top:5px; border-radius:5px;">
+    <div class="container rounded-2">
+        <div class="shadow row pt-3" style="padding:5px; margin-top:5px; border-radius:5px;">
             <div class="col-4">
-                <img  class="" style="width:200px; height:300px;" src="{{object.image.url}}"></img>
+                <img  class="rounded-1" style="width:200px; height:300px;" src="{{object.image.url}}"></img>
             </div>
             <div class="col-6 m-2">
                 <table class="table">
                     <tbody>
                       <tr>
                         <th scope="row">Kitob nomi</th>
-                        <td>{{object.title}}</td>
+                        <td>{{object.title}} </td>
+                      </tr>
+                      <tr>
+                      <tr>
+                        <th scope="row">Kitob hajmi</th>
+                        <td>{{book_size}}</td>
                       </tr>
                       <tr>
                         <th scope="row">Muallifi</th>
@@ -31,20 +35,31 @@
                       </tr>        
                       <tr >
                         <th scope="row">
-                            <a href="{{object.pdf.url}}" target="_blank"><button type="button" class="btn btn-primary btn-sm"> Ko'rish</button> </a>                   
+                            <a href="{{object.pdf.url}}" target="_blank"><button type="button" style="" class="btn btn-primary btn-sm"> Ko'rish</button> </a>                   
                         </th>
                         <td>
                             <a href="{{object.pdf.url}}"><button type="button" class="btn btn-primary btn-sm">Yuklab olish</button></a>
-                        </td>
-                           {% comment %} <embed src="{{object.pdf.url}}" width="100%" height="700px"/> {% endcomment %}
-                            {% comment %} <iframe href="{{object.pdf.url}}" width="100%" height="700px"></iframe> {% endcomment %}         
+                        </td>        
                       </tr>        
                   </table>
                 </div>  
           </div>   {{count}}
     </div>
 
-    <div class="container">
-
+    <div class="container mt-3 shadow rounded-2">
+      <h2>Fikr-mulohaza qoldirish</h2>
+      <form method="POST" class="pb-2">
+        {% csrf_token %}
+        <label for="username">User</label>
+        <input type='text' value='' id='username' placeholder="foydalanuvchi nomi"> <p>
+        <label for="rate">Baholang</label>
+          <input type='range' value='0' id='rate' placeholder="foydalanuvchi nomi"> <p>
+        <label for="email">Email</label>
+          <input type='email' value=' ' id="email" placeholder="email"> <p>
+        <label for="feedback">Fikr mulohaza</label>
+          <textarea type='comment' value=' ' id="feedback" rows="8" cols="40"> Izoh qoldirish </textarea><p>
+          <input type="submit" class="btn btn-primary" value="Jo'natish">  
+        {% comment %} {% form.as_p %} {% endcomment %}
+      </form>
     </div>
 {% endblock content %}

@@ -1,6 +1,6 @@
+from django.conf.urls import handler404
 from django.urls import path, include
 from . import views
-from django.conf.urls import handler404
 
 handler404 = 'bookhiveapp.views.custom_404'
 app_name="bookhiveapp"

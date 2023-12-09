@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.urls import reverse
 from accounts.models import CustomUser
 CHOOSE_CATEGORY = (
     ('RM', 'BADIIY'),
@@ -34,11 +35,21 @@ class Book(models.Model):
     category = models.CharField(choices=CHOOSE_CATEGORY, max_length=4)
     pdf = models.FileField(upload_to="pdf_books")
     views_count = models.IntegerField(null=True, blank=True, default=0)
+    
     def __str__(self):
         return self.title
     
 class UserData(models.Model):
     user = models.TextField(default=None)
+    
+    def __str__(self):
+        return self.user
+    
+class Feedback(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    email = models.EmailField()
+    feedback = models.TextField()
     
     def __str__(self):
         return self.user
