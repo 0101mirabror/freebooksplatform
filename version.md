@@ -23,7 +23,15 @@ profile sahifasi qo'shildi
 ## version 5 
 1. DRF is added
 2. IsAuthenticated permission class is added
-3. 
+3. footer is added.
+4. input form border is removed.
+5. dropdown input is added for book's author.
+6. background image is added.
+7. Login bug is fixed.
+8. Book size calculating function is added
+
+version4 == version6
+version6 == version4
 
 ## must done
 

@@ -69,8 +69,14 @@ body
 {   
     background-color:beige;
     height: 100vh;
+    background-size: cover;
+    background-position: center;
 
 }
+input:focus {
+    outline: none;
+  }
+
 
 .form {
     margin-left: 15%;

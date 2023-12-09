@@ -1,24 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container mt-5 shadow p-5 " style="border-radius:5px">
-        <a href="{% url 'books:add_book' %}"> Kitob qo'shish</a><p>
-         
-        username: {{ user.username}}<p>
-        user id: {{ pk }}<p>
-        user emial: {{ user.email}}<p>
-              
-       <a href="{% url 'account:logout-user' %}"><button type="button">Logout</button></a>
-       <a href="{% url 'account:edit-profile' %}"><button type="button">Profile edit</button></a>
-       {% if user.is_superuser %}
-       <a href="http://localhost:8000/admin/"><button type="button">Admin panel</button></a>
-       {% endif %}
+        <div class="row">
+                <div class="col">
+               Foydalanuvchi nomi: {{ user.username}}<p><p>
+               Identifikatsiya raqami: {{ pk }}<p>
+               Email: {{ user.email}}<p>
+               <a href="{% url 'books:add_book' %}" style="text-decoration:none"><button type="button" class="btn btn-success"> Kitob qo'shish</button></a> 
+               <a href="{% url 'account:logout-user' %}"><button type="button" class="btn btn-danger">Logout</button></a>
+               <a href="{% url 'account:edit-profile' %}"><button type="button" class="btn btn-info">Profile edit</button></a>
+               {% if user.is_superuser %}
+               <a href="http://localhost:8000/admin/"><button type="button" class="btn btn-secondary">Admin panel</button></a>
+               {% endif %}
+               </div>
+               <div class="col">
+                 <img class="rounded-5 "src="{{user.image.url}}" style="height:200px; width:200px; float:right; ">
+                  
+               </div>
+        </div>
         
 </div>
 {% if books %}
 <div class="container mt-5 shadow p-5 " style="border-radius:5px">
         <p><b> Tahrirlash </b></p>
         {% for book in books %}
-        <a href="{% url 'books:book_edit' book.pk%}"> <img class="me-1" src="{{book.image.url}}" height="200px" width="120px"></a>
+        <a href="{% url 'books:book_edit' book.pk%}"> <img class="me-1 border rounded-1" src="{{book.image.url}}" height="200px" width="120px"></a>
         {% endfor %}
 </div>
 {%  endif %}
