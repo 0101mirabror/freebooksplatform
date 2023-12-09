@@ -4,17 +4,12 @@
 {% block content %}
 {% if user.is_authenticated %}
 <a  class="container m-5" href="{% url 'account:logout-user' %}"><button type="button">Logout</button></a>
-
-{% else %}
- 
-    
+{% else %}    
 <div class="container mt-4 shadow p-4" style="background-color:#dfe0d3">
     <b class="  h1  mb-4" style="padding-bottom:50px; margin:auto">
        <p class="text-center mt-5"> Signup</p>
     </b> </hr>
     <div class="btn btn-primary" >
-       
-        {% comment %} <b>Google authentication</b><p> {% endcomment %}
         <a  class="text-white text-decoration-none" href="{% provider_login_url 'google' %}"> <i class="fa-brands fa fa-google fa-2xl"></i></a>
     </div>
     <div class="btn btn-primary" >
@@ -27,7 +22,6 @@
         {% endfor %}
     {% endif %}
     {% csrf_token %}
-    {% comment %} {{ form.as_p }} {% endcomment %}
     {% for field in form %}
     <div> 
       {{ field.label_tag }}

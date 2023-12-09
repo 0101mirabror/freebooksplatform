@@ -30,14 +30,17 @@ profile sahifasi qo'shildi
 7. Login bug is fixed.
 8. Book size calculating function is added
 
+## version6
 version4 == version6
 version6 == version4
+
+## version7
+1. unnecessary code are deleted.
 
 ## must done
 
 - email verification add to project
   https://www.codesnail.com/django-allauth-email-authentication-tutorial/
-- kitob qo'shgan foydalanuvchilarning qo'shmagan va ro'yxatdan o'tgan foydalanuvchialrga nisbatini ko''rsatish
+- kitob qo'shgan foydalanuvchilarning qo'shmagan va ro'yxatdan o'tgan foydalanuvchilarga nisbatini ko''rsatish
 - ko'p kitob qo'shgan foydalanuvchini userlar ro'yxatida tepaga chiqarish
-
-MArkdown ishlmadi
+- Markdown ishlmadi
