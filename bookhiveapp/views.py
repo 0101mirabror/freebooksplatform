@@ -5,8 +5,9 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView, DetailView
 from django.db.models import Q
-from. import models
- 
+from . import models, forms
+from django.views import View
+from .utility import get_file_size
 
 class BookListView(ListView):
     model = models.Book
@@ -26,7 +27,7 @@ class AuthorDetailView(DetailView):
         context = super(AuthorDetailView, self).get_context_data(**kwargs)
         context['booklist'] = models.Book.objects.filter(author=self.author).order_by('title')
         return context
-from .utility import get_file_size
+
 class BookDetailView(DetailView):
     model = models.Book
     template_name = "book_detail.html"
@@ -47,46 +48,49 @@ class BookDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         book = models.Book.objects.get(id=self.object.id)
         context['book_size'] = get_file_size(book.pdf.size)
+        context['users'] = models.CustomUser.objects.all()
+        print((self.request.user), '\n\n\n\n\n')
+        context['current'] = models.CustomUser.objects.get(username=str(self.request.user))
+        
+
         return context
+
     
-    # def get(self, request, pk, *args, **kwargs):
-    #     def get_ip(request):
-    #         adress = request.META.get('HTTP_X_FORWARDED_FOR')
-    #         # print(request.META)
-    #         if adress:
-    #             ip = adress.split(',')[-1].strip()
-    #             print(adress.split(',')[-1].strip(), '\n\n\n')
-    #         else:
-    #             ip = request.META.get('REMOTE_ADDR')
-    #         return ip
-    #     ip = get_ip(request)
-    #     u = models.UserData(user=ip)
-    #     print("ip address:", ip)
-    #     result = models.UserData.objects.filter(Q(user__icontains=ip))
-    #     if len(result) == 1:
-    #         print("user exists")
-    #     elif len(result) > 1:
-    #         print('user exists')        
-    #     else:
-    #         u.save()
-    #         print('user is unique')
-    #     count = models.UserData.objects.all().count()
-    #     print("total users count is ", count)
-    #     return render(request, 'book_detail.html', {'count': count})
+from django.http import HttpResponse, HttpResponseRedirect
+class SaveCommentView(View):
+    model = models.Feedback
+    fields = ['user', 'book', 'email', 'rate', 'feedback']
+
+    def post(self, request, *args, **kwargs):
+        # Process the comment data here
+        print(request.POST)
+        user = request.user
+        rate = request.POST.get('rate')
+        book = request.POST.get('book')
+        book1 = Book.objects.get(id=int(book))
+        email = request.POST.get('email')
+        comment = request.POST.get('feedback')
+        feedback = models.Feedback(user=user, rate=int(rate), book=book1, email=email,   feedback=comment)
+        feedback.save()
+         
+        
+       
+        # HttpResponseRedirect(reverse('your_url_name')) //alternatively
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))  # Replace with your desired URL
+
+    def get(self, request, *args, **kwargs):
+        # Handle GET requests if needed
+        # ...
+
+        # Return an appropriate HttpResponse object
+        return HttpResponse("This is a GET request")  # Replace with your desired response
+def save_comment(request):
+    print(request.method)
+    form = forms.FeedbackForm(request.POST)
 
 class AuthorListView(ListView):
     model = models.Author
     template_name = "author_list.html"
-
-    # def get_context_data(self,request, *args, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     author_instance = models.Author.objects.get(pk=)
-    #     books = models.Book.objects.filter
-    #     context[''] = 1
-    #     return context
-
-    # def get(self, request, *args, **kwargs):
-    #     author = models.Author.objects.get()
  
 class BookSearchView(ListView):
     model = models.Book
@@ -149,11 +153,6 @@ def book_post(request, *args, **kwargs):
     else:
         messages.success(request, 'Book is not saved  successfully!!!')
         return redirect('/addbook')
-
-    # def get_context_data(self, **kwargs):
-    #     context = super(BookCategory, self).get_context_data(**kwargs)
-    #     context['book_category'] = self.category
-    #     return context
 
 def book_payment(request, pk):
     context = {

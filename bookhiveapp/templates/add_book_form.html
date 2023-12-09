@@ -7,7 +7,7 @@
         </h2>
         <form  method="POST" action="{% url 'books:save_book' %}" enctype="multipart/form-data">
           <label for="author">Kitob muallifini tanlang:</label>
-          <select class="p-2" id="author" name="author">
+          <select class="p-2 custom-select mr-sm-2"   id="author" name="author">
             <option value="" selected>Muallifni tanlang</option>
             {% for author in authors %}
             <option value="{{author}}">{{author}}</option>

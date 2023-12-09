@@ -98,11 +98,9 @@ from twilio.rest import Client
 def login_user(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
-        print(f"\n\n PROFILE VIEW = { 1}\n\n")
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
-            print(f"\n\n PROFILE VIEW = {2}\n\n")
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)

@@ -36,6 +36,7 @@ version6 == version4
 
 ## version7
 1. unnecessary code are deleted.
+2. Feedback for book section is nearly added.
 
 ## must done
 

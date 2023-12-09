@@ -48,7 +48,20 @@
           </div>   {{count}}
     </div>
 
-    <div class="container">
-
+    <div class="container mt-3 shadow rounded-2">
+      <h2>Fikr-mulohaza qoldirish</h2>
+      <form method="POST" class="pb-2"  action="{% url 'books:save_comment' %}"  enctype="multipart/form-data">
+        {% csrf_token %}
+        {% comment %} <input type="hidden" name="user" value="{{current}}"> {% endcomment %}
+        <input type="hidden" name="book" value="{{object.id}}">
+        <label for="rate">Baholang</label>  
+            <input type='range' name='rate' id='rate' placeholder="foydalanuvchi nomi"> <p>
+        <label for="email">Email</label>
+          <input type='email' name='email' id="email" placeholder="email"/> <p>
+        <label for="feedback">Fikr mulohaza</label>
+          <textarea type='comment' name='feedback' id="feedback" rows="8" cols="40"> Izoh qoldirish </textarea><p>
+          <input type="submit" class="btn btn-primary" value="Jo'natish">  
+        
+      </form>
     </div>
 {% endblock content %}

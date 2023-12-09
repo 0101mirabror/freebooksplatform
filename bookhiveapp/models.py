@@ -43,3 +43,13 @@ class UserData(models.Model):
     def __str__(self):
         return self.user
     
+class Feedback(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    email = models.EmailField()
+    rate = models.IntegerField()
+    feedback = models.TextField()
+    
+    def __str__(self):
+        return self.user
+    
