@@ -13,6 +13,11 @@ class BookListView(ListView):
     model = models.Book
     template_name = "book_list.html"
     paginate_by = 4
+    context_object_name = "books"
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        ordered_queryset = queryset.order_by('title')  # Replace 'title' with the desired field
+        return ordered_queryset
 
 class AuthorDetailView(DetailView):
     model = models.Author
@@ -51,7 +56,7 @@ class BookDetailView(DetailView):
         context['users'] = models.CustomUser.objects.all()
         print((self.request.user), '\n\n\n\n\n')
         context['current'] = models.CustomUser.objects.get(username=str(self.request.user))
-        
+        context['comments'] = models.Feedback.objects.filter(book=book)
 
         return context
 

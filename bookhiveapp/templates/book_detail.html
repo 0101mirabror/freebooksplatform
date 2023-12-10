@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-        <div class="shadow row" style="padding:5px; margin-top:5px; border-radius:5px;">
-            <div class="col-4">
+    <div class="container ">
+        <div class="shadow row " style="padding:5px; margin-top:5px; border-radius:5px;">
+            <div class="col-4 ">
                 <img  class="" style="width:200px; height:300px;" src="{{object.image.url}}"></img>
             </div>
             <div class="col-6 m-2">
@@ -48,20 +48,32 @@
           </div>   {{count}}
     </div>
 
-    <div class="container mt-3 shadow rounded-2">
-      <h2>Fikr-mulohaza qoldirish</h2>
+    <div class="container row  mt-3 shadow rounded-2" style="margin-left:62px; background-color:	#ADD8E6">
+      <div class="col">
+      <h2 class="pt-2 text-center">Fikr-mulohaza qoldirish</h2>
       <form method="POST" class="pb-2"  action="{% url 'books:save_comment' %}"  enctype="multipart/form-data">
         {% csrf_token %}
-        {% comment %} <input type="hidden" name="user" value="{{current}}"> {% endcomment %}
+        <input type="hidden" name="user" value="{{current}}">
         <input type="hidden" name="book" value="{{object.id}}">
-        <label for="rate">Baholang</label>  
-            <input type='range' name='rate' id='rate' placeholder="foydalanuvchi nomi"> <p>
         <label for="email">Email</label>
-          <input type='email' name='email' id="email" placeholder="email"/> <p>
-        <label for="feedback">Fikr mulohaza</label>
-          <textarea type='comment' name='feedback' id="feedback" rows="8" cols="40"> Izoh qoldirish </textarea><p>
+          <input type='email' name='email' id="email" placeholder=" "/> <p>
+            <label for="feedback">Fikr mulohaza</label>
+            <textarea  style="outline:none; border:0;" class="rounded-1" type='comment' name='feedback' id="feedback" rows="10" cols="80"> </textarea><p>
+            <label for="rate">Baholang</label>  
+                <input type='range' name='rate' id='rate' value="0" placeholder="foydalanuvchi nomi"> <p>
           <input type="submit" class="btn btn-primary" value="Jo'natish">  
         
       </form>
+      </div>
+      <div class="col mt-5 pb-5">
+        <div class="card">
+          {% for comment in comments%}
+          <div class='p-3'>
+          <h6 style="color:#191970;">{{comment.email}}</h6>
+          <p>{{comment.feedback}}</p>
+        </div>
+          {% endfor%}
+        </div>
+      </div>
     </div>
 {% endblock content %}

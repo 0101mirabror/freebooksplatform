@@ -20,7 +20,8 @@ profile sahifasi qo'shildi
 2. gmail verification is added(not working)
 3. sign up view is designed.
 
-## version 5 
+## version 5
+
 1. DRF is added
 2. IsAuthenticated permission class is added
 3. footer is added.
@@ -31,12 +32,15 @@ profile sahifasi qo'shildi
 8. Book size calculating function is added
 
 ## version6
+
 version4 == version6
 version6 == version4
 
 ## version7
+
 1. unnecessary code are deleted.
-2. Feedback for book section is nearly added.
+2. Feedback for book section is added.
+3. comment list section is added.
 
 ## must done
 
