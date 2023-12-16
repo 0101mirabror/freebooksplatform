@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-
+{% block title %}Kitob nomi - {{object.title}}{% endblock %}
 {% block content %}
-    <div class="container ">
+    <div class="container rounded-2">
         <div class="shadow row " style="padding:5px; margin-top:5px; border-radius:5px;">
             <div class="col-4 ">
                 <img  class="" style="width:200px; height:300px;" src="{{object.image.url}}"></img>

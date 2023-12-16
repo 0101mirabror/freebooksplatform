@@ -1,16 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Barcha kitoblar{% endblock %}
 {% block content %}
 <body style="height:100vh;">
-    <div class=" mt-2">
+    <div class=" mt-2 ">
       {% for message in messages %}
         <div class="alert alert-{{message.tags}}" role="alert">
           {{message}}
         </div>
       {% endfor %}
     </div>
-
-    <div style="d-flex" class="d-flex container">
+    <div class="container mb-2 shadow rounded-2" style="background-color:#ADD8E6;">
+      <form  action="{% url 'books:filter_books' %}" method="GET">
+      <div class="row p-2">
+        
+        <div class="col">
+        {% comment %} <input type="text" name="author" placeholder="Muallif"> {% endcomment %}
+      
+          <select class="p-2 custom-select mr-sm-2"   id="author" name="author">
+            <option value="" selected>Kitob muallifi </option>
+            {% for author in authors %}
+            <option value="{{author}}">{{author}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="col">
+          <select class="p-2 custom-select mr-sm-2"   id="category" name="category">
+            <option value="" selected>Janr</option>
+            <option value="RM">Badiiy</option>
+            <option value="CM">Diniy</option>
+            <option value="MD">Maktab darsliklari</option>
+            <option value="SH">Bolalar</option>
+            <option value="BI">Biografiya</option>
+            <option value="CR">Bizness</option>
+            <option value="TC">Texnologiya</option>
+            <option value="AT">San'at</option>
+            <option value="HC">Tibbiyot</option>
+            <option value="HC">Shahsiy rivojlanish</option>
+            <option value="SR">Ilmiy adabiyot</option>
+            <option value="ST">Siyosat va qonun</option>
+          </select>
+        </div>
+        
+        <div class="col">
+        <button  class="btn btn-success p-2"  type="submit">
+          <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+        </button>
+        </div>
+      </div>
+  </form>
+  </div>
+    <div style="d-flex" class="d-flex container shadow rounded-2">
       <table class="table table-striped">
         <thead>
           <tr>

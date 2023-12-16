@@ -21,11 +21,15 @@ profile sahifasi qo'shildi
 3. sign up view is designed.
 
 <<<<<<< HEAD
+
 ## version 5
 
 =======
+
 ## version 5 (-)
->>>>>>> 31cc04060be8ebe3f5b5f2f62db692f3f7a2650d
+
+> > > > > > > 31cc04060be8ebe3f5b5f2f62db692f3f7a2650d
+
 1. DRF is added
 2. IsAuthenticated permission class is added
 3. footer is added.
@@ -36,6 +40,7 @@ profile sahifasi qo'shildi
 8. Book size calculating function is added
 
 <<<<<<< HEAD
+
 ## version6
 
 version4 == version6
@@ -44,15 +49,23 @@ version6 == version4
 ## version7
 
 =======
+
 ## version6(+)
+
 version4 == version6
 version6 == version4
 
 ## version7(+)
->>>>>>> 31cc04060be8ebe3f5b5f2f62db692f3f7a2650d
+
 1. unnecessary code are deleted.
 2. Feedback for book section is added.
 3. comment list section is added.
+
+## version8
+
+1.  filter will added.
+2.  each page title is added.
+3.  Svg file is changed.
 
 ## must done
 
@@ -60,4 +73,4 @@ version6 == version4
   https://www.codesnail.com/django-allauth-email-authentication-tutorial/
 - kitob qo'shgan foydalanuvchilarning qo'shmagan va ro'yxatdan o'tgan foydalanuvchilarga nisbatini ko''rsatish
 - ko'p kitob qo'shgan foydalanuvchini userlar ro'yxatida tepaga chiqarish
-- Markdown ishlmadi
+- Markdown ishlamadi

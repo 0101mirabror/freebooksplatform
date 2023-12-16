@@ -18,6 +18,11 @@ class BookListView(ListView):
         queryset = super().get_queryset()
         ordered_queryset = queryset.order_by('title')  # Replace 'title' with the desired field
         return ordered_queryset
+    def get_context_data(self, **kwargs: Any):
+        context = super(BookListView, self).get_context_data(**kwargs)
+        context['authors'] = models.Author.objects.all()
+        context['genres'] = models.Author.objects.all()
+        return context
 
 class AuthorDetailView(DetailView):
     model = models.Author
@@ -201,9 +206,37 @@ class GenresView(TemplateView):
             'diniy':  models.Book.objects.filter(category="CM").count(),
             'maktab': models.Book.objects.filter(category="MD").count(),
             'bolalar':models.Book.objects.filter(category="SH").count(),      
+            'biografiya': models.Book.objects.filter(category="BI").count(),
+            'biznes':  models.Book.objects.filter(category="CR").count(),
+            'technology': models.Book.objects.filter(category="TC").count(),
+            'sanat':models.Book.objects.filter(category="AT").count(),      
+            'sogliq': models.Book.objects.filter(category="HC").count(),
+            'shahsiy':  models.Book.objects.filter(category="PG").count(),
+            'ilmiy': models.Book.objects.filter(category="SR").count(),
+            'siyosat':models.Book.objects.filter(category="ST").count(),      
         }
         context['quantity'] = dic
         return context
+    
+def filter_books(request):
+     
+    title = request.GET.get('title')
+    author = request.GET.get('author')
+    genre = request.GET.get('category')
+    views_count = request.GET.get('views_count')
+
+    books = Book.objects.all()
+
+    if title:
+        books = books.filter(title__icontains=title)
+    if author:
+        books = books.filter(author__firstname__icontains=author)
+    if genre:
+        books = books.filter(category__icontains=genre)
+    if views_count:
+        books = books.filter(views_count=views_count)
+
+    return render(request, 'filtered_books.html', {'books': books,  })
 
 
 

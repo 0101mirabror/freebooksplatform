@@ -5,7 +5,15 @@ CHOOSE_CATEGORY = (
     ('RM', 'BADIIY'),
     ('CM', 'DINIY'),
     ('MD', 'MAKTAB DARSLIKLARI'),
-    ('SH', 'BOLALAR')
+    ('SH', 'BOLALAR'),
+    ('BI', 'BIOGRAFIYA'),
+    ('CR', 'BIZNES'),
+    ('ST', 'SIYOSAT'),
+    ('TC', 'TEXNOLOGIYA'),
+    ('AT', 'SANAT'),
+    ('PG', 'SHAHSIY RIVOJLANISH'),
+    ('HC', 'SOG\'LIQNI SAQLASH'),
+    ('SR', 'ILMIY'),
 )
 class Author(models.Model):
     firstname = models.CharField(max_length=20)
