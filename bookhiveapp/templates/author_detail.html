@@ -13,11 +13,10 @@
         </div>
      
         <div class="card shadow m-2 p-3 mb-5 d-flex">
-            <p class=" "><b>Kitoblari:</b></p>
+            <p><b>Kitoblari:</b></p>
             <hr>
                 {% for book in booklist %}
                 <a href="{% url 'books:book_detail' book.pk %}"><img  class=" shadow m-2" style="width:200px; height:250px;" src="{{book.image.url}}"></img></a>
-                {% comment %} <p>{{book.title}}</p> {% endcomment %}
                 {% endfor %} 
             
         </div>

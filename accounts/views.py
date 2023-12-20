@@ -1,12 +1,16 @@
 import uuid
 from django.shortcuts import render, redirect
 from .models import CustomUser, Profile
-from .forms import CustomUserCreationForm, LoginForm, CustomUserChangeForm
-from django.contrib.auth import login,  authenticate
-from bookhiveapp.models import Book
-from django.contrib import messages
 import os
+
+from django.contrib.auth import login, logout,  authenticate
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from twilio.rest import Client
+
+from bookhiveapp.models import Book
+from .forms import CustomUserCreationForm, LoginForm, CustomUserChangeForm
 from .tokens import send_mail_after_registration
 
 def token_send (request):
@@ -90,7 +94,7 @@ def login_user(request):
         form = LoginForm()
     return render(request, 'login.html', {"form": form})
 
-from django.contrib.auth import logout
+
 
 def logout_user(request):
     logout(request)
@@ -103,7 +107,7 @@ def list_user(request, limit=200):
     }
     return render(request, "list_user.html", context)
 
-from django.contrib.auth.decorators import login_required
+
 @login_required
 def edit_profile(request):
     if request.method == 'POST':

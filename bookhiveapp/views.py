@@ -8,16 +8,24 @@ from django.db.models import Q
 from . import models, forms
 from django.views import View
 from .utility import get_file_size
+from django.views.generic import TemplateView
+from django.views.generic import UpdateView
+from django.urls import reverse_lazy
+from .models import Book
+    
+from django.http import HttpResponse, HttpResponseRedirect
 
 class BookListView(ListView):
     model = models.Book
     template_name = "book_list.html"
     paginate_by = 4
     context_object_name = "books"
+
     def get_queryset(self):
         queryset = super().get_queryset()
         ordered_queryset = queryset.order_by('title')  # Replace 'title' with the desired field
         return ordered_queryset
+    
     def get_context_data(self, **kwargs: Any):
         context = super(BookListView, self).get_context_data(**kwargs)
         context['authors'] = models.Author.objects.all()
@@ -62,11 +70,9 @@ class BookDetailView(DetailView):
         print((self.request.user), '\n\n\n\n\n')
         context['current'] = models.CustomUser.objects.get(username=str(self.request.user))
         context['comments'] = models.Feedback.objects.filter(book=book)
-
         return context
 
-    
-from django.http import HttpResponse, HttpResponseRedirect
+
 class SaveCommentView(View):
     model = models.Feedback
     fields = ['user', 'book', 'email', 'rate', 'feedback']
@@ -94,6 +100,7 @@ class SaveCommentView(View):
 
         # Return an appropriate HttpResponse object
         return HttpResponse("This is a GET request")  # Replace with your desired response
+
 def save_comment(request):
     print(request.method)
     form = forms.FeedbackForm(request.POST)
@@ -166,7 +173,6 @@ def book_post(request, *args, **kwargs):
 
 def book_payment(request, pk):
     context = {
-
     }
     return render(request, "payment.html", context)
 
@@ -174,31 +180,20 @@ def book_payment(request, pk):
 def custom_404(request, exception):
     return render(request, "404.html", status=404)
 
-from django.views.generic import UpdateView
-from django.urls import reverse_lazy
-from .models import Book
-
-
 # class based view for django edit -update model
 class BookModelUpdateView(UpdateView):
     model = Book
-    # fields = '__all__' # Replace with the fields you want to edit
-    # exclude = ['owner', 'views_count']
-    fields = ['title', 'duration', 'image', 'category', 'pdf', ]  # Replace with the fields you want to edit
-    template_name = 'edit_book.html'  # Replace with the name of your template
-    # success_url = reverse_lazy('books_list')  # Replace with the URL name of your success URL
+    # Replace with the fields you want to edit
+    fields = ['title', 'duration', 'image', 'category', 'pdf', ]  
+    # Replace with the name of your template
+    template_name = 'edit_book.html'
     def get_success_url(self):
         return reverse_lazy('bookhiveapp:book_detail', kwargs={'pk': self.object.pk})
- 
 
- 
- 
-
-
-from django.views.generic import TemplateView
-
+# view displays all genre's list
 class GenresView(TemplateView):
     template_name = 'genres.html'
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         dic = {
@@ -218,15 +213,13 @@ class GenresView(TemplateView):
         context['quantity'] = dic
         return context
     
+# view filters books by author and category  
 def filter_books(request):
-     
     title = request.GET.get('title')
     author = request.GET.get('author')
     genre = request.GET.get('category')
     views_count = request.GET.get('views_count')
-
     books = Book.objects.all()
-
     if title:
         books = books.filter(title__icontains=title)
     if author:
@@ -235,8 +228,7 @@ def filter_books(request):
         books = books.filter(category__icontains=genre)
     if views_count:
         books = books.filter(views_count=views_count)
-
-    return render(request, 'filtered_books.html', {'books': books,  })
+    return render(request, 'filtered_books.html', {'books': books,})
 
 
 

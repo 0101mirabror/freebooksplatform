@@ -10,6 +10,9 @@ SECRET_KEY=os.getenv("SECRET_KEY")
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+REQUESTS = {
+    'timeout': 200,  # Timeout value in seconds
+}
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -219,3 +222,6 @@ EMAIL_HOST_PASSWORD = 'bvpfijgpdkzpcoha'
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 # SMTP settings //end // version4
+
+
+X_FRAME_OPTIONS = "SAMEORIGIN"

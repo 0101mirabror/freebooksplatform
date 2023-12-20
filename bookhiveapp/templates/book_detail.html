@@ -37,7 +37,8 @@
                       </tr>        
                       <tr >
                         <th scope="row">
-                            <a href="{{object.pdf.url}}" target="_blank"><button type="button" class="btn btn-primary btn-sm"> Ko'rish</button> </a>                   
+                            {% comment %} <a href="{{object.pdf.url}}"><button id="toggleButton"  type="button" class="btn btn-primary btn-sm"> Ko'rish</button> </a>                    {% endcomment %}
+                             <button id="toggleButton"  type="button" class="btn btn-primary btn-sm"> Ko'rish</button>                     
                         </th>
                         <td>
                             <a href="{{object.pdf.url}}"><button type="button" class="btn btn-primary btn-sm">Yuklab olish</button></a>
@@ -45,7 +46,15 @@
                       </tr>        
                   </table>
                 </div>  
-          </div>   {{count}}
+          </div>    
+           
+    </div>
+    {% comment %} {{object.pdf.url}} {% endcomment %}
+    <div class=" container mt-3 shadow rounded-2 ratio ratio-16x9"  >
+      {% comment %} <iframe  src="{{object.pdf.url}}" id="myParagraph" style="width:85%; height=975px" frameborder="0" allowfullscreen></iframe> {% endcomment %}
+      {% comment %} <p id="myParagraph" style="display: none;">This is the content of the paragraph.</p> {% endcomment %}
+      <iframe width="560" height="315" src="{{object.pdf.url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      {% comment %} <iframe width="560" height="315" src="https://www.youtube.com/embed/WOviyskMQ_M?si=w8xq_UuRvlcaNrCK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> {% endcomment %}
     </div>
 
     <div class="container row  mt-3 shadow rounded-2" style="margin-left:62px; background-color:	#ADD8E6">
@@ -76,4 +85,17 @@
         </div>
       </div>
     </div>
+    <!--Javascript-->
+    <script>
+      var toggleButton = document.getElementById("toggleButton");
+      var myParagraph = document.getElementById("myParagraph");
+    
+      toggleButton.addEventListener("click", function() {
+        if (myParagraph.style.display === "none") {
+          myParagraph.style.display = "block";
+        } else {
+          myParagraph.style.display = "none";
+        }
+      });
+    </script>
 {% endblock content %}
