@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block title %} Onlayn o'qish {% endblock   %}
+{% block content %}
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script>
+  <div class="ms-5 container rounded-1 m-3 p-2">
+    <button  class="btn btn-outline-success" id="prev">Oldingi</button>
+    <button  class="btn btn-outline-success" id="next">Keyingi</button>
+    <button class="btn btn-outline-info" id="zoomIn">++</button>
+    <button class="btn btn-outline-info" id="zoomOut">--</button>
+    <span>Sahifa: <span id="page_num"></span> / <span id="page_count"></span></span>
+    <canvas class="ms-5 mb-3 mt-5 card rounded-2" id="pdf_canvas"></canvas> 
+  </div>
+  <script>
+    var pdfDoc = null,
+    pageNum = 1,
+    pageRandering = false,
+    pageNumPending = null,
+    scale = 1.5,
+    canvas = document.getElementById("pdf_canvas")
+    ctx = canvas.getContext('2d')
+
+    function renderPage(num){
+      pageRendering = true
+      pdfDoc.getPage(num).then((page)=>{
+        var viewport = page.getViewport({scale:scale});
+        canvas.height = viewport.height
+        canvas.width = viewport.width
+
+        var renderContext = {
+          canvasContext : ctx,
+          viewport: viewport,
+        }
+
+        var renderTask = page.render(renderContext)
+        renderTask.promise.then(()=>{
+          pageRendering = false;
+          if (pageNumPending !== null){
+            renderPage(pageNumPending)
+            pageNumPending = null
+          }
+        })
+      })
+      document.getElementById('page_num').textContent = num;
+    }
+
+    function queueRenderPage(num) {
+      if (pageRendering){
+        pageNumberPending = num
+      } else {
+        renderPage(num)
+      }
+    }
+
+    function onPrevPage(){
+      if (pageNum <= 1 ){
+        return
+      }
+      pageNum--;
+      queueRenderPage(pageNum)
+    }
+    document.getElementById('prev').addEventListener('click', onPrevPage)
+    
+    function onNextPage(){
+      if (pageNum >= pdfDoc.numPages ){
+        return;
+      }
+      pageNum++;
+      queueRenderPage(pageNum)
+    }
+    document.getElementById('next').addEventListener('click', onNextPage)
+
+    function zoomOut(){
+      scale -= 0.1
+      renderPage(pageNum)
+    }
+    document.getElementById('zoomOut').addEventListener('click', zoomOut)
+
+    function zoomIn(){
+      scale += 0.1
+      renderPage(pageNum)
+    }
+    document.getElementById('zoomIn').addEventListener('click', zoomIn)
+    
+    pdfjsLib.getDocument('{{pdf_url}}').promise.then((doc)=>{
+      pdfDoc = doc
+      document.getElementById('page_count').textContent = doc.numPages;
+      renderPage(pageNum)
+    })
+  </script>
+{% endblock content %}

@@ -38,7 +38,15 @@
                       <tr >
                         <th scope="row">
                             {% comment %} <a href="{{object.pdf.url}}"><button id="toggleButton"  type="button" class="btn btn-primary btn-sm"> Ko'rish</button> </a>                    {% endcomment %}
-                             <button id="toggleButton"  type="button" class="btn btn-primary btn-sm"> Ko'rish</button>                     
+                            <a href="{% url 'books:pdf_viewer' %}?pdf_url={{ object.pdf.url }}">
+                              <button type="button" class="btn btn-primary btn-sm">View PDF</button>
+                          </a>
+                            {% comment %} <form method="GET">
+                              <input type="hidden" name="pdf_url" value="{{object.pdf.url}}"> 
+                              <button type="submit" name="Ko'rish">ko'rish</button>
+                            </form> {% endcomment %}
+                                                         
+                            {% comment %} <button id="toggleButton"  type="button" class="btn btn-primary btn-sm"> Ko'rish</button>                      {% endcomment %}
                         </th>
                         <td>
                             <a href="{{object.pdf.url}}"><button type="button" class="btn btn-primary btn-sm">Yuklab olish</button></a>
@@ -50,12 +58,12 @@
            
     </div>
     {% comment %} {{object.pdf.url}} {% endcomment %}
-    <div class=" container mt-3 shadow rounded-2 ratio ratio-16x9"  >
+    {% comment %} <div class=" container mt-3 shadow rounded-2 ratio ratio-16x9"  > {% endcomment %}
       {% comment %} <iframe  src="{{object.pdf.url}}" id="myParagraph" style="width:85%; height=975px" frameborder="0" allowfullscreen></iframe> {% endcomment %}
       {% comment %} <p id="myParagraph" style="display: none;">This is the content of the paragraph.</p> {% endcomment %}
-      <iframe width="560" height="315" src="{{object.pdf.url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      {% comment %} <iframe width="560" height="315" src="{{object.pdf.url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> {% endcomment %}
       {% comment %} <iframe width="560" height="315" src="https://www.youtube.com/embed/WOviyskMQ_M?si=w8xq_UuRvlcaNrCK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> {% endcomment %}
-    </div>
+    {% comment %} </div> {% endcomment %}
 
     <div class="container row  mt-3 shadow rounded-2" style="margin-left:62px; background-color:	#ADD8E6">
       <div class="col">

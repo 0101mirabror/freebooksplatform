@@ -105,6 +105,10 @@ def save_comment(request):
     print(request.method)
     form = forms.FeedbackForm(request.POST)
 
+
+def show_pdf(request):
+    pdf_url = request.GET.get('pdf_url') 
+    return render(request, 'pdf_viewer.html', {'pdf_url': pdf_url})
 class AuthorListView(ListView):
     model = models.Author
     template_name = "author_list.html"

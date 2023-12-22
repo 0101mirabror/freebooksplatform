@@ -18,6 +18,7 @@ urlpatterns = [
     path('book/<int:pk>/edit/', views.BookModelUpdateView.as_view(), name='book_edit'),
     path('genres/', views.GenresView.as_view(), name='books_genres'),
     path('filter/', views.filter_books, name='filter_books'),
+    path('pdfviewer/', views.show_pdf, name='pdf_viewer'),
    
     
 ]

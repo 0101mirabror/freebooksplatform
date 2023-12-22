@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles', # {% load static %}
     'bookhiveapp.apps.BookhiveappConfig', # local
     'accounts.apps.AccountsConfig', # local
     'markdownx', # django-markdownx
