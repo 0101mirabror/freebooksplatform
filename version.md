@@ -66,6 +66,13 @@ version6 == version4
 1.  filter will added.
 2.  each page title is added.
 3.  Svg file is changed.
+4.  pdf viewer is created.
+
+## version9.
+
+1. login error is fixed.
+2. rate book is added.
+3. feedbackform error handling using javascript.
 
 ## must done
 

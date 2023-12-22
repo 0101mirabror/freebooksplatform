@@ -70,6 +70,10 @@ class BookDetailView(DetailView):
         print((self.request.user), '\n\n\n\n\n')
         context['current'] = models.CustomUser.objects.get(username=str(self.request.user))
         context['comments'] = models.Feedback.objects.filter(book=book)
+        rates = models.Feedback.objects.filter(book=book)
+        ls = [rate.rate for rate in rates]  
+        if sum(ls) != 0:
+            context['rating'] = (sum(ls)//len(ls))//10
         return context
 
 
@@ -78,7 +82,6 @@ class SaveCommentView(View):
     fields = ['user', 'book', 'email', 'rate', 'feedback']
 
     def post(self, request, *args, **kwargs):
-        # Process the comment data here
         print(request.POST)
         user = request.user
         rate = request.POST.get('rate')
@@ -86,6 +89,7 @@ class SaveCommentView(View):
         book1 = Book.objects.get(id=int(book))
         email = request.POST.get('email')
         comment = request.POST.get('feedback')
+        print(comment==" ", "comment", len(comment))
         feedback = models.Feedback(user=user, rate=int(rate), book=book1, email=email,   feedback=comment)
         feedback.save()
          
@@ -109,6 +113,7 @@ def save_comment(request):
 def show_pdf(request):
     pdf_url = request.GET.get('pdf_url') 
     return render(request, 'pdf_viewer.html', {'pdf_url': pdf_url})
+
 class AuthorListView(ListView):
     model = models.Author
     template_name = "author_list.html"

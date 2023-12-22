@@ -36,6 +36,11 @@
                         <td>{{object.owner}}</td>
                       </tr>        
                       <tr >
+                      <tr>
+                        <th scope="row">Rating</th>
+                        <td>{% if rating %}{{rating}} / 10{% endif %}</td>
+                      </tr>        
+                      <tr >
                         <th scope="row">
                             {% comment %} <a href="{{object.pdf.url}}"><button id="toggleButton"  type="button" class="btn btn-primary btn-sm"> Ko'rish</button> </a>                    {% endcomment %}
                             <a href="{% url 'books:pdf_viewer' %}?pdf_url={{ object.pdf.url }}">
@@ -46,7 +51,7 @@
                               <button type="submit" name="Ko'rish">ko'rish</button>
                             </form> {% endcomment %}
                                                          
-                            {% comment %} <button id="toggleButton"  type="button" class="btn btn-primary btn-sm"> Ko'rish</button>                      {% endcomment %}
+                            {% comment %}                     {% endcomment %}
                         </th>
                         <td>
                             <a href="{{object.pdf.url}}"><button type="button" class="btn btn-primary btn-sm">Yuklab olish</button></a>
@@ -57,27 +62,26 @@
           </div>    
            
     </div>
-    {% comment %} {{object.pdf.url}} {% endcomment %}
-    {% comment %} <div class=" container mt-3 shadow rounded-2 ratio ratio-16x9"  > {% endcomment %}
-      {% comment %} <iframe  src="{{object.pdf.url}}" id="myParagraph" style="width:85%; height=975px" frameborder="0" allowfullscreen></iframe> {% endcomment %}
-      {% comment %} <p id="myParagraph" style="display: none;">This is the content of the paragraph.</p> {% endcomment %}
-      {% comment %} <iframe width="560" height="315" src="{{object.pdf.url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> {% endcomment %}
-      {% comment %} <iframe width="560" height="315" src="https://www.youtube.com/embed/WOviyskMQ_M?si=w8xq_UuRvlcaNrCK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe> {% endcomment %}
-    {% comment %} </div> {% endcomment %}
+   
+     
+    
 
-    <div class="container row  mt-3 shadow rounded-2" style="margin-left:62px; background-color:	#ADD8E6">
+    <div class="container rounded-2 ">
+      <div class="row  mt-3 shadow " style=" background-color:	#ADD8E6; border-radius:5px;">
       <div class="col">
       <h2 class="pt-2 text-center">Fikr-mulohaza qoldirish</h2>
-      <form method="POST" class="pb-2"  action="{% url 'books:save_comment' %}"  enctype="multipart/form-data">
+      <form id="myForm" method="POST" class="pb-2"  action="{% url 'books:save_comment' %}"  enctype="multipart/form-data">
         {% csrf_token %}
-        <input type="hidden" name="user" value="{{current}}">
+        <input type="hidden" name="user"  value="{{current}}">
         <input type="hidden" name="book" value="{{object.id}}">
         <label for="email">Email</label>
           <input type='email' name='email' id="email" placeholder=" "/> <p>
-            <label for="feedback">Fikr mulohaza</label>
-            <textarea  style="outline:none; border:0;" class="rounded-1" type='comment' name='feedback' id="feedback" rows="10" cols="80"> </textarea><p>
-            <label for="rate">Baholang</label>  
-                <input type='range' name='rate' id='rate' value="0" placeholder="foydalanuvchi nomi"> <p>
+            <span id="errorText1" style="color: red;"></span><p>
+              <label for="feedback">Fikr-mulohaza</label>
+              <textarea id="feedback" style="outline:none; border:0;" class="rounded-1" type='comment' name='feedback' id="feedback" rows="10" cols="80"> </textarea><p>
+              <span id="errorText2" style="color: red;"></span><p>
+            <label class="" for="rate">Baholang[1-5]</label>  
+                <input   type='range' name='rate' id='rate'  step="20" min="0" max="100" value="0" placeholder="foydalanuvchi nomi"> <p>
           <input type="submit" class="btn btn-primary" value="Jo'natish">  
         
       </form>
@@ -93,17 +97,36 @@
         </div>
       </div>
     </div>
+  </div>
     <!--Javascript-->
     <script>
-      var toggleButton = document.getElementById("toggleButton");
-      var myParagraph = document.getElementById("myParagraph");
-    
-      toggleButton.addEventListener("click", function() {
-        if (myParagraph.style.display === "none") {
-          myParagraph.style.display = "block";
+    document.getElementById("myForm").addEventListener("submit", function(event) {
+      var inputField1 = document.getElementById("email");
+      var errorText1 = document.getElementById("errorText1");
+      
+      if (inputField1.value === "" || inputField1.value === null) {
+          event.preventDefault();  // Prevent form submission
+          errorText1.textContent = "iltimos emailni kiriting"; 
+          // alert("Please enter a value"); 
+           // Display an error message or perform other actions
         } else {
-          myParagraph.style.display = "none";
+          errorText1.textContent = ""; 
         }
       });
-    </script>
+      document.getElementById("myForm").addEventListener("submit", function(event) {
+
+      var errorText2 = document.getElementById("errorText2");
+      console.log(errorText2)
+      var inputField2 = document.getElementById("feedback");
+      console.log(inputField2)
+      if (inputField2.value === " " || inputField2.value === null) {
+          event.preventDefault();  // Prevent form submission
+          errorText2.textContent = "iltimos fikrni kiriting"; 
+          // alert("Please enter a value"); 
+           // Display an error message or perform other actions
+        } else {
+          errorText2.textContent = ""; 
+        }
+     });
+</script>
 {% endblock content %}

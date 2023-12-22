@@ -54,10 +54,12 @@ def register_user(request):
                     return redirect('/account/register')
                 form.save()
                 token = str(uuid.uuid4)
+                print(token, "token")
                 user_obj = CustomUser.objects.get(email=email)
+                print(user_obj)
                 profile_obj = Profile.objects.create(user = user_obj , auth_token = token)
                 profile_obj.save()
-                send_mail_after_registration(email='fayzullayevmirabror1@gmail.com', token='<function uuid4 at 0x00000276BD224C20>', request=request, username='admin1')
+                send_mail_after_registration(email=email, token=token, request=request, username='admin1')
                 return redirect('/account/token')
     else:
         form = CustomUserCreationForm()
@@ -65,8 +67,10 @@ def register_user(request):
 
 def verify(request, token):
     try:
+        print("\n\n\n", token)
         profile_obj = Profile.objects.get(auth_token = token) 
         profile_obj = Profile.objects.filter(auth_token = token).first() 
+        
         if profile_obj:
             profile_obj.is_verified = True
             profile_obj.save()
@@ -85,9 +89,14 @@ def login_user(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = authenticate(request, username=username, password=password)
-            if user is not None:
+            user_id = CustomUser.objects.get(username=username)
+            print(user_id, user_id.pk)
+            # Profile.objects.get(user=user_id.pk).is_verified and
+            if  user is not None:
                 login(request, user)
                 return redirect('/')
+            # elif not Profile.objects.get(user=username).is_verified:
+            #     form.add_error(None, "Foydalanuvchi tasdiqlanmagan")
             else: 
                 form.add_error(None, "Invalid username or password.")
     else:
