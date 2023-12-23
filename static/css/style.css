@@ -128,3 +128,22 @@ label
 {
    padding-bottom: 10px; 
 }
+
+
+/* start: star rating  */
+.container .star {
+    display: flex;
+    grid-gap: 20px;
+}
+
+.container .star a {
+    transition: .6s;
+    color: #333;
+    font-size: 40px;
+}
+
+.container .star a.active{
+    color: gold;
+}
+
+/* end: star rating  */

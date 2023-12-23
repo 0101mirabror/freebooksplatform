@@ -1,29 +1,65 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="container mt-5 shadow p-5" style="border-radius:5px;">
-        <div class="row">
-                <div class="col">
-               Foydalanuvchi nomi: {{ user.username }}<p><p>
-               Identifikatsiya raqami: {{ pk }}<p>
-               Email: {{ user.email }}<p>
-               <a href="{% url 'books:add_book' %}" style="text-decoration:none"><button type="button" class="btn btn-success"> Kitob qo'shish</button></a> 
-               <a href="{% url 'account:logout-user' %}"><button type="button" class="btn btn-danger">Logout</button></a>
-               <a href="{% url 'account:edit-profile' %}"><button type="button" class="btn btn-info">Profile edit</button></a>
-               {% if user.is_superuser %}
-               <a href="http://localhost:8000/admin/"><button type="button" class="btn btn-secondary">Admin panel</button></a>
-               {% endif %}
-               </div>
-               <div class="col">
-                 <img class="rounded-5 "src="{{user.image.url}}" style="height:200px; width:200px; float:right; ">               
-               </div>
-        </div>       
+{% extends "base.html" %} {% block content %}
+<div class="container mt-5 shadow p-5" style="border-radius: 5px">
+  <div class="row">
+    <!-- user profile links-->
+    <div class="col">
+      Foydalanuvchi nomi: {{ user.username }}
+      <p></p>
+      <p>Email: {{ user.email }}</p>
+      <p>
+        <a href="{% url 'books:add_book' %}" style="text-decoration: none"
+          ><button type="button" class="btn btn-success">
+            Kitob qo'shish
+          </button></a
+        >
+        <a href="{% url 'account:logout-user' %}"
+          ><button type="button" class="btn btn-danger">
+            Tizimdan chiqish
+          </button></a
+        >
+        <a href="{% url 'account:edit-profile' %}"
+          ><button type="button" class="btn btn-info">
+            Profilni tahrirlash
+          </button></a
+        >
+        {% if user.is_superuser %}
+      </p>
+
+      <p>
+        <a href="http://localhost:8000/admin/"
+          ><button type="button" class="btn btn-secondary">
+            Admin panel
+          </button></a
+        >
+        {% endif %}
+      </p>
+    </div>
+
+    <!--user profile image-->
+    <div class="col">
+      <img
+        class="rounded-5"
+        src="{{user.image.url}}"
+        style="height: 200px; width: 200px; float: right"
+      />
+    </div>
+  </div>
 </div>
-{% if books %}
-<div class="container mt-5 shadow p-5" style="border-radius:5px">
-        <p><b> Tahrirlash </b></p>
-        {% for book in books %}
-        <a href="{% url 'books:book_edit' book.pk%}"> <img class="me-1 border rounded-1" src="{{book.image.url}}" height="200px" width="120px"></a>
-        {% endfor %}
+<!-- book list which are added by current user-->
+<div class="container mt-5 shadow p-5" style="border-radius: 5px">
+  {% if books %}
+  <p><b> Tahrirlash </b></p>
+
+  <!--book images and links-->
+  {% for book in books %}
+  <a href="{% url 'books:book_edit' book.pk%}">
+    <img
+      class="me-1 border rounded-1"
+      src="{{book.image.url}}"
+      height="200px"
+      width="120px"
+    />
+  </a>
+  {% endfor %} {% endif %}
 </div>
-{%  endif %}
 {% endblock content %}

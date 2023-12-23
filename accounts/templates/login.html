@@ -2,17 +2,23 @@
 {% block title %}Tizimga kirish - bookhive.uz{% endblock %}
 {% block content %}
 <div class="container mt-4 shadow p-4" style="background-color:#dfe0d3;">
+    <!-- title of sign up-->
     <b class="h1 mb-4" style="padding-bottom:50px; margin:auto;">
        <p class="text-center mt-5"> Signup</p>
     </b>
-  </hr>
-    <form method="POST"  class="mt-5" enctype="multipart/form-data">
+
+    </hr>
+
+    <form class="mt-5" method="POST" enctype="multipart/form-data">
+      <!--error messages-->
       {% if messages %}
         {% for message in messages %}
           <div class="alert-danger">{{message}}</div>
         {% endfor %}
       {% endif %}
+
       {% csrf_token %}
+      <!--user login inputs-->
       {% for field in form %}
         <div> 
           {{ field.label_tag }}
@@ -20,6 +26,7 @@
           {{ field.errors }}        
         </div>
       {% endfor %}
+      
       <button class="btn btn-primary p-3" type="submit">Register</button>
     </form>
 </div>
