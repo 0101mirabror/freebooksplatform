@@ -18,7 +18,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 class BookListView(ListView):
     model = models.Book
     template_name = "book_list.html"
-    paginate_by = 4
+    paginate_by = 8
     context_object_name = "books"
 
     def get_queryset(self):
@@ -69,7 +69,11 @@ class BookDetailView(DetailView):
         context['users'] = models.CustomUser.objects.all()
         print((self.request.user), '\n\n\n\n\n')
         context['current'] = models.CustomUser.objects.get(username=str(self.request.user))
-        context['comments'] = models.Feedback.objects.filter(book=book)
+        context['comments'] = reversed(list(models.Feedback.objects.filter(book=book))[-5:])
+        rates = models.Feedback.objects.filter(book=book)
+        ls = [rate.rate for rate in rates]  
+        if sum(ls) != 0:
+            context['rating'] = (sum(ls)//len(ls))//10
         return context
 
 
@@ -83,6 +87,8 @@ class SaveCommentView(View):
         user = request.user
         rate = request.POST.get('rate')
         book = request.POST.get('book')
+        if rate == None:
+            return redirect(f"/book/{book}")
         book1 = Book.objects.get(id=int(book))
         email = request.POST.get('email')
         comment = request.POST.get('feedback')
@@ -141,14 +147,18 @@ class AuthorSearchView(ListView):
 
 class BookCategory(ListView):
     model = models.Book
-    template_name = 'book_list.html'
+    template_name = 'book_genre.html'
     paginate_by = 4
 
     def get_queryset(self):
         self.category = self.kwargs['category']
         movies = models.Book.objects.filter(category=self.category)
         return movies
-    
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        self.category = self.kwargs['category']
+        context = super().get_context_data(**kwargs)
+        context['genres'] = Book.objects.filter(category=self.category)
+        return context
 class AddBookView(TemplateView):
     model = models.Book
     template_name = "add_book_form.html"
@@ -163,6 +173,8 @@ def book_post(request, *args, **kwargs):
         owner = request.user
         writer = request.POST.get('author')
         author = models.Author.objects.get(firstname=writer)
+        author.books_number += 1
+        author.save()
         title = request.POST.get('title')  
         duration = request.POST.get('duration')  
         image = request.FILES.get('image')

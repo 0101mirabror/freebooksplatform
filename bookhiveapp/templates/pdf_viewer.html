@@ -3,13 +3,20 @@
 {% block content %}
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.min.js"></script>
   <div class="ms-5 container rounded-1 m-3 p-2">
+    <div class="row">
+    <div class=" ">
     <button  class="btn btn-outline-success" id="prev">Oldingi</button>
     <button  class="btn btn-outline-success" id="next">Keyingi</button>
     <button class="btn btn-outline-info" id="zoomIn">++</button>
-    <button class="btn btn-outline-info" id="zoomOut">--</button>
+    <button class="btn btn-outline-info" id="zoomOut">--</button>  
     <span>Sahifa: <span id="page_num"></span> / <span id="page_count"></span></span>
-    <canvas class="ms-5 mb-3 mt-5 card rounded-2" id="pdf_canvas"></canvas> 
+    </div>
+    <div class="row ms-1" width="50px" height="500px">  
+    <canvas class=" mb-3 mt-5 card rounded-2" width="200px" height="500px" id="pdf_canvas"></canvas> 
+    </div>
   </div>
+  </div>
+
   <script>
     var pdfDoc = null,
     pageNum = 1,

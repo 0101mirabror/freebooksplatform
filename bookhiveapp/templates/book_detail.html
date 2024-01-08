@@ -35,7 +35,11 @@
             <tr>
               <th scope="row">Qo'shdi</th>
               <td>{{object.owner}}</td>
-            </tr>        
+            </tr>  
+            <tr>
+              <th scope="row">Rating</th>
+              <td>{% if rating %}{{rating}} / 10{% endif %}</td>
+            </tr>       
             <tr>
               <th scope="row">
                   <a href="{% url 'books:pdf_viewer' %}?pdf_url={{ object.pdf.url }}">
@@ -51,8 +55,9 @@
     </div>    
   </div>
   <!--feedback section-->
-  <div class="container row  mt-3 shadow rounded-2" style="margin-left:62px; background-color:	#ADD8E6">
+  <div class="container mt-3 shadow rounded-2" style="background-color:	#ADD8E6">
     <!--leave feedback-->
+    <div class="row">
     <div class="col">
       <h2 class="pt-2 text-center">Fikr-mulohaza qoldirish</h2>
       <form id="myForm" method="POST" class="pb-2"  action="{% url 'books:save_comment' %}"  enctype="multipart/form-data">
@@ -66,7 +71,7 @@
         <span id="errorText1" style="color: red;"></span><p>
         
         <label for="feedback">Fikr mulohaza</label>
-        <textarea  style="outline:none; border:0;" class="rounded-1" type='comment' name='feedback' id="feedback" rows="10" cols="80"> </textarea><p>
+        <textarea  style="outline:none; border:0;" class="rounded-1" type='comment' name='feedback' id="feedback" rows="5" cols="60"> </textarea><p>
         <span id="errorText2" style="color: red;"></span><p>
 
         {% comment %} <label for="rate">Baholang[1-5]</label>  
@@ -135,6 +140,7 @@
         {% endfor%}
       </div>
     </div>
+  </div>
   </div>
 
 

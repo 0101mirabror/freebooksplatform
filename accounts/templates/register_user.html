@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load socialaccount %}
-{% block title %} Ro'yhatdan o'tish - bookhive.uz {% endblock %}
+{% block title %} Ro'yxatdan o'tish - bookhive.uz {% endblock %}
 {% block content %}
 {% if user.is_authenticated %}
     <!-- for authenticated user-->
@@ -11,7 +11,7 @@
 <div class="container mt-4 shadow p-4" style="background-color:#dfe0d3;">
     <!-- title of sign up-->
     <b class="h1 mb-4" style="padding-bottom:50px; margin:auto;">
-       <p class="text-center mt-5"> Signup</p>
+       <p class="text-center mt-5"> Ro'yxatdan o'tish</p>
     </b> 
 
     </hr>
@@ -37,7 +37,7 @@
         <div> 
         {% for field in form %}
             {{ field.label_tag }}
-            <span style="outline:none">{{ field }}</span>
+            <span style="outline:none">{{ field }}</span><p>
             {{ field.errors }}        
         {% endfor %}
         </div>

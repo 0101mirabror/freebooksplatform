@@ -1,6 +1,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* font-family: 'Nunito', sans-serif; */
 
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+ /* 'Ubuntu', sans-serif; */
 body, h3, ul, li 
 {
     margin: 0;
@@ -147,3 +150,43 @@ label
 }
 
 /* end: star rating  */
+
+
+/* list, grid views start */
+.list-grid-icons{
+    /* background: #f44336; */
+    margin: 30px auto;  
+}
+
+.fa-grid {
+    color: #fff;
+    margin: 5px 10px;
+    font-size: 25px !important;
+    cursor: pointer;
+}
+
+.fa-grid:hover{
+    /* color: #000; */
+    color: #fff;
+    transition: .4s;
+
+}
+
+.rowlist{
+    display: flex;
+    flex-wrap: wrap;  
+}
+#column1, #column2, #column3, #column4 {
+    width: 25%
+
+}
+.rowlist img {
+    width: 98%;
+    padding:1%;
+}
+/* list, grid views end */
+
+.book-ls-font{
+     
+    font-family:'Ubuntu', sans-serif;
+}
