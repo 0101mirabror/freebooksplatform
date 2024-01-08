@@ -1,15 +1,27 @@
 {% extends 'base.html' %}
+{% block title %}Janrlar - BookHive{% endblock %}
+{% load static %}
 {% block content %}
- <div class="container d-block">
-    
-  <div class="mb-3"><b  href=" " role="button" >
+ <div class="container d-block mt-2 rounded-1 p-2">
+    <b class="pb-5" role="button" >
       Janrni tanlang 
-    </b></div>
-     
-        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'RM' %}">Badiiy adabiyot({{quantity.badiiy}})</a>      
-        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'CM' %}">Diniy adabiyot({{quantity.diniy}})</a>    
-        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'SH' %}">Bolalar adabiyoti({{quantity.bolalar}})</a>
-        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'MD' %}">Maktab darsliklari({{quantity.maktab}})</a>
-    
+    </b>
+     <div class="row">
+        <div class="col">
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'RM' %}"><img src="{% static 'images/category/badiiy asar -adabiyot.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Badiiy adabiyot({{quantity.badiiy}})</a>      
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'CM' %}"><img src="{% static 'images/category/diniy.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Diniy adabiyot({{quantity.diniy}})</a>    
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'SH' %}"><img src="{% static 'images/category/children.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Bolalar adabiyoti({{quantity.bolalar}})</a>
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'MD' %}"><img src="{% static 'images/category/education-academic.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Maktab darsliklari({{quantity.maktab}})</a>
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'BI' %}"><img src="{% static 'images/category/biography.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Biografiya({{quantity.biografiya}})</a>
+        <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'CR' %}"><img src="{% static 'images/category/business-career.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Bizness va karyera({{quantity.biznes}})</a>
+        </div>
+        <div class="col">
+          <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'ST' %}"><img src="{% static 'images/category/politics -law.jpg'%}" height="40px" width="40px" class="rounded-5 me-2"/>Siyosat va qonun({{quantity.siyosat}})</a>      
+          <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'TC' %}"><img src="{% static 'images/category/technology.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Texnologiya({{quantity.technology}})</a>    
+          <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'AT' %}"><img src="{% static 'images/category/art.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Sa'nat({{quantity.sanat}})</a>
+          <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'PG' %}"><img src="{% static 'images/category/personal-growth.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Shahsiy rivojlanish({{quantity.shahsiy}})</a>
+          <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'HC' %}"><img src="{% static 'images/category/health-fitness.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Sog'liqni saqlash({{quantity.sogliq}})</a>
+          <p><a class="text-decoration-none m-4 shadow p-1" href="{% url 'books:book_category' 'SR' %}"><img src="{% static 'images/category/ilmiy-tadqiqot.jpg'%}"  height="40px" width="40px" class="rounded-5 me-2"/>Ilmiy({{quantity.ilmiy}})</a>
+        </div>
 </div>
 {% endblock content%}

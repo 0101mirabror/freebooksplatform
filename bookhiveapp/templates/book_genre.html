@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} Janrlar {% endblock %}
+{% block content %}
+<div class="container">
+  {% for genre in genres %}
+  <p>{{genre}}</p>
+  {% endfor %}
+</div>
+{% endblock content%}

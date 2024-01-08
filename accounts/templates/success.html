@@ -2,14 +2,14 @@
 {% block content %}
 <div class="global-container">
     <div class="card login-form">
-    <div class="card-body">
-        <h3 class="card-title text-center">You have successfully registered as user </h3>
-        <div class="card-text text-center">
-            Please login 
-            <a class= "btn btn-primary" href="{% url 'login_attempt' %}"></a>
-           
+        <div class="card-body">
+            <!--redirected from gmail verification-->
+            <h3 class="card-title text-center">You have successfully registered as user </h3>
+            <!--login url-->
+            <div class="card-text text-center">
+            <a class= "btn btn-primary" href="{% url 'login_attempt' %}">Please login </a>
+            </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock %}

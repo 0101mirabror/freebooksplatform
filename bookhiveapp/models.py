@@ -5,7 +5,15 @@ CHOOSE_CATEGORY = (
     ('RM', 'BADIIY'),
     ('CM', 'DINIY'),
     ('MD', 'MAKTAB DARSLIKLARI'),
-    ('SH', 'BOLALAR')
+    ('SH', 'BOLALAR'),
+    ('BI', 'BIOGRAFIYA'),
+    ('CR', 'BIZNES'),
+    ('ST', 'SIYOSAT'),
+    ('TC', 'TEXNOLOGIYA'),
+    ('AT', 'SANAT'),
+    ('PG', 'SHAHSIY RIVOJLANISH'),
+    ('HC', 'SOG\'LIQNI SAQLASH'),
+    ('SR', 'ILMIY'),
 )
 class Author(models.Model):
     firstname = models.CharField(max_length=20)
@@ -42,4 +50,12 @@ class UserData(models.Model):
     
     def __str__(self):
         return self.user
+    
+class Feedback(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    email = models.EmailField()
+    rate = models.IntegerField()
+    feedback = models.TextField()
+
     

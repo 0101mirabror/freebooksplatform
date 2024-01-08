@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
-
+{% block title %} {{author.firstname}} {{author.lastname}} - bookhive.uz{% endblock %}
 {% block content %}
-    <div class="container">
-        <div class=" shadow  m-2 row" style="padding:5px; margin-top:5px; border-radius:5px;">
-            <div class="col-4">
-                <img  style="width:200px; height:250px;" src="{{author.image.url}}"></img>
-            </div>
-            {% comment %} {{context}} {% endcomment %}
-            <div class="col-6 m-2">
-                <p><b>Yozuvchi:</b>  {{author.firstname}} {{author.lastname}}</p>
-                <p></b>{{author.life}}</p> 
-            </div>
-        </div>   
-        <div class="shadow m-2 p-3 d-flex">
-            <p class=" "><b>Kitoblari:</b></p>
-            <hr>
-                {% for book in booklist %}
-                <a href="{% url 'books:book_detail' book.pk %}"><img  class=" shadow m-2" style="width:200px; height:250px;" src="{{book.image.url}}"></img></a>
-                {% comment %} <p>{{book.title}}</p> {% endcomment %}
-                {% endfor %} 
-            
-        </div>
+  <div class="container rounded-2">
+    <div class="row  mt-3 m-2" style="padding:5px; margin-top:5px; border-radius:5px;">
+      <div class="col-4">
+        <img class="m-2" style="width:200px; height:250px;" src="{{author.image.url}}"></img>
+      </div>
+      <div class="col-6 m-2">
+        <p><b>Yozuvchi:</b>  {{author.firstname}} {{author.lastname}}</p>
+        <p></b>{{author.life}}</p> 
+      </div>
     </div>
+  </div>
+
+  <div class="container rounded-2">
+    <div class="  m-2 p-3 mb-5 d-flex">
+      <p class="m-2"><b>Kitoblari:</b></p><p>
+      <hr>
+        {% for book in booklist %}
+        <a href="{% url 'books:book_detail' book.pk %}"><img  class=" shadow m-2" style="width:200px; height:250px;" src="{{book.image.url}}"></img></a>
+        {% endfor %}     
+    </div>
+  </div>
 {% endblock content %}

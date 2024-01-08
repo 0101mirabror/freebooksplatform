@@ -1,34 +1,33 @@
 {% extends "base.html" %}
-
+{% block title %}Tizimga kirish - bookhive.uz{% endblock %}
 {% block content %}
+<div class="container mt-4 shadow p-4" style="background-color:#dfe0d3;">
+    <!-- title of sign up-->
+    <b class="h1 mb-4" style="padding-bottom:50px; margin:auto;">
+       <p class="text-center mt-5"> Tizimga kirish</p>
+    </b>
 
-    
-<div class="container mt-4 shadow p-4" style="background-color:#dfe0d3">
-    <b class="  h1  mb-4" style="padding-bottom:50px; margin:auto">
-       <p class="text-center mt-5"> Signup</p>
-    </b> </hr>
-<form method="POST"  class="mt-5 " enctype="multipart/form-data">
-    {% if messages %}
+    </hr>
+
+    <form class="mt-5" method="POST" enctype="multipart/form-data">
+      <!--error messages-->
+      {% if messages %}
         {% for message in messages %}
-            <div class="alert-danger">{{message}}</div>
+          <div class="alert-danger">{{message}}</div>
         {% endfor %}
-    {% endif %}
-    {% csrf_token %}
-    {% comment %} {{ form.as_p }} {% endcomment %}
-    {% for field in form %}
-    <div> 
-      {{ field.label_tag }}
-      <span style="outline:none">{{ field }}</span>
-      {{ field.errors }}        
-    </div>
-    {% endfor %}
-    <button  class="btn btn-primary p-3" type="submit" >Register</button>
-</form>
+      {% endif %}
+
+      {% csrf_token %}
+      <!--user login inputs-->
+      {% for field in form %}
+        <div> 
+          {{ field.label_tag }}
+            <span style="outline:none">{{ field }}</span>
+          {{ field.errors }}        
+        </div>
+      {% endfor %}
+      
+      <button class="btn btn-primary p-3" type="submit">Login</button>
+    </form>
 </div>
 {% endblock content %}
-{% comment %} <form method="POST" class="container" enctype="multipart/form-data">
-    
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" >Login</button>
-</form> {% endcomment %}

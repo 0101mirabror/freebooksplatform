@@ -1,32 +1,35 @@
 {% extends "base.html" %}
+{% block title %} Foydalanuvchilar - bookhive.uz {% endblock %}
 {% block content %}
+<div class="d-flex container">
+  <table class="table table-striped justify-content-center">
 
+    <!--table titles-->
+    <thead>
+      <tr>
+        <th scope="col" style="text-align:center">No</th>
+        <th scope="col" style="text-align:center">Username</th>
+        <th scope="col" style="text-align:center">Email</th>
+        <th scope="col" style="text-align:center">Image</th>
+        <th scope="col" style="text-align:center">Oxirgi kirish</th>
+      </tr>
+    </thead>
+    
+    <!-- table body, user's list-->
+    {% for user in users %}
+      {% if not user.is_superuser %}
+      <tbody>
+        <tr>
+          <th style="text-align:center " scope="row">{{forloop.counter}}</th>
+          <td style="text-align:center">{{ user.username }}</td>
+          <td style="text-align:center">{{ user.email}}</td>
+          <td style="text-align:center"><a><img width='100px' height='150px' src="{{user.image.url}}"></img></td>
+          <td style="text-align:center">{% if user.last_login %} {{user.last_login}} {% else %} aktiv emas {% endif %}</td>
+        </tr>
+      </tbody>
+      {% endif %}
+    {% endfor %} 
 
- 
- <div style="d-flex" class="d-flex container">
-    <table class="table table-striped justify-content-center">
-     <thead>
-       <tr>
-         <th scope="col" style="text-align:center " >No</th>
-         <th scope="col" style="text-align:center ">Username</th>
-         <th scope="col" style="text-align:center">Email</th>
-         <th scope="col" style="text-align:center">Image</th>
-         <th scope="col" style="text-align:center">Oxirgi kirish</th>
-       </tr>
-     </thead>
-     {% for user in users %}
-      
-       <tbody  >
-         <tr>
-           <th style="text-align:center " scope="row">{{forloop.counter}}</th>
-           <td style="text-align:center"> {{ user.username }}</td>
-           <td style="text-align:center">{{ user.email}}</td>
-           <td style="text-align:center"><a href=" "><img width=100px height=150px src="{{user.image.url}}"></img></td>
-           <td style="text-align:center">{% if user.last_login %} {{user.last_login}} {% else %} aktiv emas {% endif %}</td>
-         </tr>
-       </tbody>
-     {% endfor %} 
-     </table>
- </div>
-
+  </table>
+</div>
 {% endblock content %}

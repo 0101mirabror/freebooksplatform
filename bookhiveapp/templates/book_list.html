@@ -1,17 +1,69 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}Barcha kitoblar{% endblock %}
 {% block content %}
 <body style="height:100vh;">
-    <div class="">
-      {% for message in messages %}
-        <div class="alert alert-{{message.tags}}" role="alert">
-          {{message}}
+  <!-- success message -->
+  <div class="mt-2">
+    {% for message in messages %}
+      <div class="alert alert-{{message.tags}}" role="alert">
+        {{message}}
+      </div>
+    {% endfor %}
+  </div>
+  <!-- filter -->
+  <div class="container mb-2 pt-2 shadow rounded-2" style="background-color:#ADD8E6;">
+    <div class="row" style='padding-bottom: 0;' >
+      <div class="col-6">
+        <form  action="{% url 'books:filter_books' %}" method="GET">
+          <div class="row p-2">
+            <div class="col">
+              <select class="p-2 custom-select mr-sm-2"   id="author" name="author">
+                <option value="" selected>Kitob muallifi </option>
+                {% for author in authors %}
+                <option value="{{author}}">{{author}}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="col">
+              <select class="p-2 custom-select mr-sm-2"   id="category" name="category">
+                <option value="" selected>Janr</option>
+                <option value="RM">Badiiy</option>
+                <option value="CM">Diniy</option>
+                <option value="MD">Maktab darsliklari</option>
+                <option value="SH">Bolalar</option>
+                <option value="BI">Biografiya</option>
+                <option value="CR">Bizness</option>
+                <option value="TC">Texnologiya</option>
+                <option value="AT">San'at</option>
+                <option value="HC">Tibbiyot</option>
+                <option value="HC">Shahsiy rivojlanish</option>
+                <option value="SR">Ilmiy adabiyot</option>
+                <option value="ST">Siyosat va qonun</option>
+              </select>
+            </div>
+            <div class="col">
+              <button  class="btn btn-success p-2"  type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="col-4">
+      </div>
+      <div class="col-2 align-self-end">
+        <div class="list-grid-icons mt-2">
+          <svg class="fa-grid" id="" onclick="removeTable()"       xmlns="http://www.w3.org/2000/svg" height="32" width="28" viewBox="0 0 448 512">    <path d="M0 96C0 60.7 28.7 32 64 32H384c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96z"/></svg>      
+          <svg class="fa-grid"  onclick="twoColumn()"  xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 0 512 512"><path d="M448 96V224H288V96H448zm0 192V416H288V288H448zM224 224H64V96H224V224zM64 288H224V416H64V288zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64z"/></svg>         
+          <svg class="fa-grid" onclick="fourColumn()" xmlns="http://www.w3.org/2000/svg" height="32px" width="32px" viewBox="0 0 512 512"><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 64v64H64V96h88zm56 0h88v64H208V96zm240 0v64H360V96h88zM64 224h88v64H64V224zm232 0v64H208V224h88zm64 0h88v64H360V224zM152 352v64H64V352h88zm56 0h88v64H208V352zm240 0v64H360V352h88z"/></svg>
         </div>
-      {% endfor %}
+      </div>
     </div>
-
-    <div style="d-flex" class="d-flex container">
-      <table class="table table-striped">
+  </div>
+  <!--list view of objects-->
+    <div class="container d-flex shadow rounded-2" style="background-color:#F1FAF4;" id="disableList" >
+      <table class="table table-striped" style="background-color: #F1FAF4;">
         <thead>
           <tr>
             <th scope="col">No</th>
@@ -20,45 +72,100 @@
             <th scope="col">Kitob muallifi</th>
             <th scope="col">Sahifalar soni</th>
           </tr>
-        </thead>
-        {% for book in object_list %}
-          <tbody>
-            <tr>
-              <th scope="row">{{forloop.counter}}</th>
-              <td><a href="{% url 'books:book_detail' book.pk  %}"><img width=100px height=150px src="{{book.image.url}}"></img></a></td>
-              <td> {{ book.title}}</td>
-              <td>{{book.author.firstname }}{% if book.author.lastname %} {{book.author.lastname }}{% endif %}</td>
-              <td>{{book.duration }}</td>
-            </tr>
-          </tbody>
-        {% endfor %}
-        </table>
+        </thead>  
+        {% for book in books %}
+        <tbody  style="background-color: #F1FAF4;">
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td class="book-ls-font"><a href="{% url 'books:book_detail' book.pk  %}"><img width=100px height=150px src="{{book.image.url}}"></img></a></td>
+            <td class="book-ls-font"> {{ book.title}}</td>
+            <td class="book-ls-font">{{book.author.firstname }} {{book.author.lastname }}</td>
+            <td class="book-ls-font">{{book.duration }}</td>
+            
+          </tr>
+        </tbody>
+        {% endfor %}   
+      </table>
     </div>
-    <div class="mt-3" style="">
+         
+      
+ 
+        <!--grid view of objects-->
+        {% comment %} <div class="row">
+          <div id="column1">  
+            {% if object_list.0 %}<a href="{% url 'books:book_detail'  object_list.0.pk   %}" ><img width=100px height=150px src="{{object_list.0.image.url}}"></img></a>{% else %}{% endif %}
+            {% if   object_list.1 %}<a href="{% url 'books:book_detail'  object_list.1.pk   %}" ><img width=100px height=150px src="{{object_list.1.image.url}}"></img></a>{% else %} {% endif %}
+          </div>
+          <div id="column2">
+            {% if   object_list.2 %}<a href="{% url 'books:book_detail'  object_list.2.pk   %}" ><img width=100px height=150px src="{{object_list.2.image.url}}"></img></a>{%else%}  {% endif %}
+            {% if   object_list.3 %}<a href="{% url 'books:book_detail'  object_list.3.pk   %}" ><img width=100px height=150px src="{{object_list.3.image.url}}"></img></a>{%else%}   {% endif %}     
+          </div>
+          <div id="column3">
+            {% if   object_list.4 %}<a href="{% url 'books:book_detail'  object_list.4.pk   %}" ><img width=100px height=150px src="{{object_list.4.image.url}}"></img></a>{%else%}  {% endif %}
+            {% if   object_list.5 %}<a href="{% url 'books:book_detail'  object_list.5.pk   %}" ><img width=100px height=150px src="{{object_list.5.image.url}}"></img></a>{%else%} {% endif %}        
+          </div>
+          <div id="column4">
+            {% if   object_list.6 %}<a href="{% url 'books:book_detail'  object_list.6.pk   %}" ><img width=100px height=150px src="{{object_list.6.image.url}}"></img></a>{%else%} {% endif %}
+            {% if   object_list.7 %}<a href="{% url 'books:book_detail'  object_list.7.pk   %}"   ><img width=100px height=150px src="{{object_list.7.image.url}}"></img></a>{%else%}  {% endif %}
+          </div>
+        </div>   {% endcomment %}
+
+    
+    <div style="" class="mt-3">
       {% if  is_paginated %}
       <div class="pagination" style="color:#fff; display:flex; margin-left:45%;">
         <ul style="display:flex; list-style:none;">
           {% if page_obj.has_previous %}
-            <li ><a style="border:1px white solid; background: green; padding:10px; color:#fff; border-color:#fff; text-decoration:none;" href="?page={{page_obj.previous_page_number}}">Prev</a></li>
+            <li class="page-item "><a class="btn btn-success page-link" style="border:1px white solid; background: green; padding:10px; color:#fff; border-color:#fff; text-decoration:none;" href="?page={{page_obj.previous_page_number}}">Prev</a></li>
           {% else %}
-            <li><a  class="disabled"></a></li>
+            <li class="page-item"><a  class="disabled"></a></li>
           {% endif %}
+        
           {% for pages in page_obj.paginator.page_range %}
             {% if page_obj.next_page_number == pages %}
-              <li><a href="" style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;">{{pages}}</a></li>
+              <li class="page-item"><a  class="page-link btn btn-success" href="" style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;">{{pages}}</a></li>
             {% else %}
-              <li><a style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;" href="?page={{pages}}">{{pages}}</a></li>
+              <li class="page-item"><a class="page-link btn btn-success"  style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;" href="?page={{pages}}">{{pages}}</a></li>
             {% endif %}
           {% endfor %}
           
           {% if page_obj.has_next %}
-            <li><a  style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;" href="?page={{page_obj.next_page_number}}">Next</a></li>
+            <li class="page-item"><a class="page-link btn btn-success"  style="border:1px  white solid; background: green; padding:10px; color:#fff; text-decoration:none;" href="?page={{page_obj.next_page_number}}">Next</a></li>
           {% else %}
-            <li><a  class="disabled"></a></li>
+            <li class="page-item"><a  class="disabled"></a></li>
           {% endif %}
         </ul>
         </div>
         {% endif %}
-         </div>      
+         </div>   
+  <script>
+    function removeTable() {
+      var myDiv = document.getElementById('disableList');
+      myDiv.parentNode.removeChild(myDiv);
+
+      document.getElementById("column1").style.width = '100%';
+
+    }
+
+    function fourColumn(){
+      
+      document.getElementById("column1").style.width = '25%';
+      document.getElementById("column2").style.width = '25%';
+      document.getElementById("column3").style.width = '25%';
+      document.getElementById("column4").style.width = '25%';
+      var myDiv = document.getElementById('disableList');
+      myDiv.parentNode.removeChild(myDiv);
+    }
+    function twoColumn(){
+      
+      document.getElementById("column1").style.width = '100%';
+      document.getElementById("column2").style.width = '100%';
+      document.getElementById("column3").style.width = '100%';
+      document.getElementById("column4").style.width = '100%';
+      var myDiv = document.getElementById('disableList');
+      myDiv.parentNode.removeChild(myDiv);
+    }
+  </script>
+        
 </body>
 {% endblock content %}

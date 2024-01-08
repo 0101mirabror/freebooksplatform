@@ -1,36 +1,40 @@
 {% extends 'base.html' %}
+{% block title %} Kitob qo'shish - bookhive.uz {% endblock %}
 {% block content %}
 {% if user.is_authenticated%}
- 
-    <div class="form">
-        <h2>
-            Kitob Qo'shish
-        </h2>
-        <form  method="POST" action="{% url 'books:save_book' %}" enctype="multipart/form-data">
-              {% csrf_token %}
+  <!-- form for saving book -->
+  <div class="form mt-3">
 
-              <label for="author">Kitob muallifini tanlang:</label>
-              <select class="p-2" id="author" name="author">
-                <option value="" selected>Muallifni tanlang</option>
-                {% for author in authors %}
-                <option value="{{author}}">{{author}}</option>
-                {% endfor %}
-              </select>
+    <h2>Kitob Qo'shish</h2>
 
+    <form method="POST" action="{% url 'books:save_book' %}" enctype="multipart/form-data">
+      <label for="author">Kitob muallifini tanlang:</label>
+      <select class="p-2 custom-select mr-sm-2" style="width:600px;"id="author" name="author">
+        <option selected>Muallifni tanlang</option>
+          {% for author in authors %}
+          <option value="{{author}}">{{author}}</option>
+          {% endfor %}
+      </select>
 
-              <label for="title">Kitob nomi</label>
-            <input type="text" name="title" id="title">
-              <label for="duration">Betlar soni</label>
-            <input type="text" name="duration" id="duration">
-              <label for="image">Muqova</label>
-            <input type="file" name="image" style="background-color: #fff; " id="image">
-            <label for="pdf">Pdf fayl</label>
-            <input type="file" name="pdf" style="background-color: #fff; " id="pdf">
-            <button class="login" type="submit"  action="check" value="addbook">Qo'shish</button>
-        </form>
-    </div>
+      {% csrf_token %}
+
+      <label for="title">Kitob nomi</label>
+      <input type="text" name="title" id="title">
+
+      <label for="duration">Betlar soni</label>
+      <input type="text" name="duration" id="duration">
+
+      <label for="image">Muqova</label>
+      <input type="file" name="image" style="background-color: #fff;" id="image">
+      
+      <label for="pdf">Pdf fayl</label>
+      <input type="file" name="pdf" style="background-color: #fff;" id="pdf">
+            
+      <button class="btn btn-primary mt-2" type="submit"  action="check" value="addbook">Qo'shish</button>
+        
+      </form>
+  </div>
   {% else %}
-   <p>Siz ro'yxatdan o'tmagansiz</p>
-   {% endif %}
-
+  <p>Siz ro'yxatdan o'tmagansiz</p>
+  {% endif %}
 {% endblock content %}
